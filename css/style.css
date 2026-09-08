@@ -79,19 +79,23 @@ em{font-style:italic;color:var(--terracotta)}
 /* ============================================================
    HEADER / NAV
    ============================================================ */
+/* Permanently dark bar (not a light/dark toggle) so a white brand
+   mark always sits on a background it was designed for. */
 .site-header{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:18px 0;transition:padding .35s var(--ease), background .35s var(--ease), box-shadow .35s var(--ease);
+  padding:18px 0;background:linear-gradient(180deg, rgba(24,14,11,.72), rgba(24,14,11,.35));
+  transition:padding .35s var(--ease), background .35s var(--ease), box-shadow .35s var(--ease), backdrop-filter .35s var(--ease);
 }
 .site-header.scrolled{
-  padding:10px 0;background:rgba(251,243,231,.85);backdrop-filter:blur(14px);
-  box-shadow:0 4px 24px -8px rgba(36,21,18,.15);
+  padding:10px 0;background:rgba(24,14,11,.92);backdrop-filter:blur(14px);
+  box-shadow:0 4px 24px -8px rgba(0,0,0,.35);
 }
 .nav-inner{
   max-width:1280px;margin:0 auto;padding:0 24px;
   display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:10px}
+.brand-logo{height:40px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
 .brand-mark{
   width:38px;height:38px;border-radius:50%;
   background:linear-gradient(135deg,var(--gold),var(--terracotta));
@@ -99,26 +103,23 @@ em{font-style:italic;color:var(--terracotta)}
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 16px -4px rgba(193,80,46,.5);
 }
-.site-header:not(.scrolled) .brand-text,
-.site-header:not(.scrolled) .main-nav a,
-.site-header:not(.scrolled) .nav-phone{color:var(--cream)}
-.brand-text{font-family:var(--ff-display);font-weight:700;font-size:1.2rem;color:var(--ink);transition:color .3s}
+.brand-text,.main-nav a,.nav-phone{color:var(--cream)}
+.brand-text{font-family:var(--ff-display);font-weight:700;font-size:1.2rem}
 .main-nav{display:flex;gap:32px}
 .main-nav a{
-  font-size:.92rem;font-weight:500;color:var(--ink-soft);position:relative;padding:4px 0;transition:color .3s;
+  font-size:.92rem;font-weight:500;opacity:.85;position:relative;padding:4px 0;transition:opacity .3s;
 }
 .main-nav a::after{
-  content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--terracotta);
+  content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold);
   transition:width .3s var(--ease);
 }
-.main-nav a:hover{color:var(--terracotta)}
+.main-nav a:hover{opacity:1}
 .main-nav a:hover::after{width:100%}
 .nav-actions{display:flex;align-items:center;gap:6px}
-.nav-phone{color:var(--ink-soft);transition:color .3s}
+.nav-phone{opacity:.9;transition:opacity .3s}
+.nav-phone:hover{opacity:1}
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;z-index:1200}
-.burger span{width:24px;height:2px;background:var(--ink);transition:transform .3s,opacity .3s}
-.site-header:not(.scrolled) .burger span{background:var(--cream)}
-.burger.active span{background:var(--cream)}
+.burger span{width:24px;height:2px;background:var(--cream);transition:transform .3s,opacity .3s}
 .burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .burger.active span:nth-child(2){opacity:0}
 .burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
