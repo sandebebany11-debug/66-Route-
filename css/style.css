@@ -96,13 +96,6 @@ em{font-style:italic;color:var(--terracotta)}
 }
 .brand{display:flex;align-items:center;gap:10px}
 .brand-logo{height:40px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
-.brand-mark{
-  width:38px;height:38px;border-radius:50%;
-  background:linear-gradient(135deg,var(--gold),var(--terracotta));
-  color:#fff;font-family:var(--ff-display);font-weight:700;font-size:.95rem;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 16px -4px rgba(193,80,46,.5);
-}
 .brand-text,.main-nav a,.nav-phone{color:var(--cream)}
 .brand-text{font-family:var(--ff-display);font-weight:700;font-size:1.2rem}
 .main-nav{display:flex;gap:32px}
