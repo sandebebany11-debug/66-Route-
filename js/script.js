@@ -79,5 +79,63 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Live opening-hours status ---------- */
+  const WEEKDAYS = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+  const HOURS = { 0: [9.5, 22], 1: [8.5, 22], 2: [8.5, 22], 3: [8.5, 22], 4: [8.5, 22], 5: [8.5, 22], 6: [8.5, 22] };
+
+  const formatTime = (decimalHours) => {
+    const h = Math.floor(decimalHours);
+    const m = Math.round((decimalHours % 1) * 60);
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  };
+
+  const findNextOpening = (now, day) => {
+    for (let i = 0; i <= 7; i++) {
+      const d = (day + i) % 7;
+      const [openAt] = HOURS[d];
+      const candidate = new Date(now);
+      candidate.setDate(now.getDate() + i);
+      candidate.setHours(Math.floor(openAt), Math.round((openAt % 1) * 60), 0, 0);
+      if (candidate > now) {
+        const when = i === 0 ? 'heute' : i === 1 ? 'morgen' : WEEKDAYS[d];
+        return `${when} um ${formatTime(openAt)} Uhr`;
+      }
+    }
+    return '';
+  };
+
+  const updateOpenStatus = () => {
+    const heroEl = document.getElementById('heroOpenStatus');
+    const liveStatus = document.getElementById('liveStatus');
+    const liveStatusSub = document.getElementById('liveStatusSub');
+    if (!heroEl || !liveStatus || !liveStatusSub) return;
+
+    const now = new Date();
+    const day = now.getDay();
+    const hoursNow = now.getHours() + now.getMinutes() / 60;
+    const [openAt, closeAt] = HOURS[day];
+    const isOpen = hoursNow >= openAt && hoursNow < closeAt;
+
+    if (isOpen) {
+      const closeStr = formatTime(closeAt);
+      heroEl.innerHTML = `<i></i> Jetzt geöffnet · schließt um ${closeStr} Uhr`;
+      heroEl.classList.remove('is-closed');
+      liveStatus.textContent = 'Aktuell geöffnet';
+      liveStatusSub.textContent = `Schließt heute um ${closeStr} Uhr`;
+    } else {
+      const nextOpen = findNextOpening(now, day);
+      heroEl.innerHTML = `<i></i> Aktuell geschlossen · öffnet ${nextOpen}`;
+      heroEl.classList.add('is-closed');
+      liveStatus.textContent = 'Aktuell geschlossen';
+      liveStatusSub.textContent = `Öffnet ${nextOpen}`;
+    }
+
+    document.querySelectorAll('#hoursTable tr').forEach(tr => {
+      tr.classList.toggle('today', Number(tr.dataset.day) === day);
+    });
+  };
+  updateOpenStatus();
+  setInterval(updateOpenStatus, 60000);
+
   onScroll();
 })();
