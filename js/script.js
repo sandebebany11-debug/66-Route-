@@ -33,7 +33,7 @@
   const floatingCta = document.querySelector('.floating-cta');
 
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = document.querySelectorAll('.reveal[data-reveal]');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
