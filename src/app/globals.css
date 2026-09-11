@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0a0a09;
+  --color-ink-soft: #141412;
+  --color-graphite: #1d1c19;
+  --color-line: rgba(245, 242, 236, 0.12);
+  --color-line-strong: rgba(245, 242, 236, 0.22);
+  --color-paper: #f6f3ec;
+  --color-paper-dim: #ece7da;
+  --color-champagne: #c9a668;
+  --color-champagne-light: #e6d3ab;
+  --color-champagne-dark: #8f7440;
+}
+
+@theme inline {
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-graphite: var(--color-graphite);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-champagne: var(--color-champagne);
+  --color-champagne-light: var(--color-champagne-light);
+  --color-champagne-dark: var(--color-champagne-dark);
+
+  --animate-marquee: marquee 32s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  scroll-behavior: auto;
+  background: var(--color-ink);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-champagne);
+  color: var(--color-ink);
+}
+
+.font-display {
+  font-family: var(--font-display), "Times New Roman", serif;
+}
+
+.hairline {
+  background: var(--color-line);
+}
+
+.text-stroke-gold {
+  -webkit-text-stroke: 1px var(--color-champagne);
+}
+
+/* Custom cursor: only on fine-pointer devices, and off entirely for touch */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-none-desktop {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
