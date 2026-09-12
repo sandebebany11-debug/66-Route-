@@ -4,6 +4,7 @@
   /* ---------- Header scroll state ---------- */
   const header = document.getElementById('siteHeader');
   const progressBar = document.getElementById('progressBar');
+  const parallaxEls = document.querySelectorAll('[data-parallax]');
 
   const onScroll = () => {
     header.classList.toggle('scrolled', window.scrollY > 60);
@@ -15,6 +16,11 @@
     progressBar.style.width = pct + '%';
 
     floatingCta.classList.toggle('visible', scrollTop > 400);
+
+    parallaxEls.forEach(el => {
+      const speed = parseFloat(el.dataset.parallax) || 0;
+      el.style.setProperty('--py', `${scrollTop * speed}px`);
+    });
   };
   window.addEventListener('scroll', onScroll, { passive: true });
 

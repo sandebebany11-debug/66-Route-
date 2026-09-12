@@ -194,6 +194,18 @@ em{font-style:italic;color:var(--terracotta)}
   100%{box-shadow:0 0 0 0 rgba(95,212,95,0)}
 }
 
+.hero-photo{
+  position:absolute;z-index:2;width:190px;aspect-ratio:1;border-radius:14px;overflow:hidden;
+  border:6px solid #fff;box-shadow:0 24px 40px -12px rgba(0,0,0,.55);
+  transform:rotate(var(--rot,0deg)) translateY(var(--py,0px));
+  transition:box-shadow .4s var(--ease);
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-photo--1{top:16%;left:4%;--rot:-9deg}
+.hero-photo--2{bottom:16%;right:4%;width:170px;--rot:8deg}
+.hero-photo--1:hover,.hero-photo--2:hover{box-shadow:0 30px 50px -10px rgba(0,0,0,.6)}
+@media (max-width:1200px){.hero-photo{display:none}}
+
 .scroll-cue{
   position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;
   width:26px;height:42px;border:2px solid rgba(255,255,255,.5);border-radius:16px;
@@ -216,6 +228,23 @@ em{font-style:italic;color:var(--terracotta)}
 .trust-item{display:flex;flex-direction:column;gap:6px}
 .trust-number{font-family:var(--ff-display);font-size:clamp(2rem,4vw,2.8rem);color:var(--gold);font-weight:700}
 .trust-label{color:rgba(251,243,231,.7);font-size:.85rem;letter-spacing:.3px}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{
+  background:var(--terracotta);overflow:hidden;padding:14px 0;
+  border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);
+}
+.ticker-track{
+  display:flex;width:max-content;gap:28px;
+  animation:ticker 26s linear infinite;
+}
+.ticker-track span{
+  font-family:var(--ff-display);font-style:italic;font-weight:600;font-size:1.05rem;
+  color:#fff;white-space:nowrap;opacity:.95;
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ============================================================
    SECTION HEAD
@@ -257,6 +286,11 @@ em{font-style:italic;color:var(--terracotta)}
 }
 .about-badge strong{font-family:var(--ff-display);color:var(--terracotta);font-size:1.05rem}
 .about-badge span{font-size:.78rem;color:var(--ink-soft)}
+.about-photo{
+  position:absolute;top:-22px;right:24px;width:96px;height:96px;border-radius:50%;
+  overflow:hidden;border:5px solid var(--cream);box-shadow:var(--shadow-md);
+}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .about-text h2{margin-bottom:22px}
 .about-text > p{color:var(--ink-soft);line-height:1.85;margin-bottom:28px;font-size:1.02rem}
 .about-points{display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
@@ -308,10 +342,21 @@ em{font-style:italic;color:var(--terracotta)}
    GALLERY
    ============================================================ */
 .gallery{padding:120px 0}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:16px;
+  grid-template-areas:
+    "big big buf buf"
+    "big big d1  d2"
+    "dol dol dol dol";
+}
+.g-big{grid-area:big}
+.g-buf{grid-area:buf}
+.g-d1{grid-area:d1}
+.g-d2{grid-area:d2}
+.g-dol{grid-area:dol}
 .gallery-item{
   position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-md);
-  aspect-ratio:3/2;transition:transform .5s var(--ease), box-shadow .5s var(--ease);
+  transition:transform .5s var(--ease), box-shadow .5s var(--ease);
 }
 .gallery-item:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
@@ -441,7 +486,7 @@ em{font-style:italic;color:var(--terracotta)}
 @media (max-width:980px){
   .about-grid,.contact-grid{grid-template-columns:1fr;gap:48px}
   .menu-columns{grid-template-columns:repeat(2,1fr)}
-  .gallery-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr;grid-template-areas:"big" "buf" "d1" "d2" "dol";grid-auto-rows:240px}
   .trust-inner{grid-template-columns:repeat(2,1fr);row-gap:32px}
   .footer-inner{grid-template-columns:1fr}
 }
