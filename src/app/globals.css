@@ -40,6 +40,19 @@
   }
 }
 
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+.ken-burns {
+  animation: kenburns 9s ease-in-out infinite alternate;
+}
+
 html {
   scroll-behavior: auto;
   background: var(--color-ink);

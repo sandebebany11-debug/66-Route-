@@ -8,17 +8,14 @@ import Salon from "@/components/sections/Salon";
 import KevinMurphy from "@/components/sections/KevinMurphy";
 import Pricing from "@/components/sections/Pricing";
 import Booking from "@/components/sections/Booking";
-import { hasClipperModel } from "@/lib/model";
 
 export default function Home() {
-  const hasCustomModel = hasClipperModel();
-
   return (
     <>
       <Navbar />
       <main>
         <Hero />
-        <MachineExperience hasCustomModel={hasCustomModel} />
+        <MachineExperience />
         <Services />
         <Team />
         <Salon />
