@@ -110,6 +110,7 @@ export default function MachineExperience() {
             src="/images/machine/assembled.jpg"
             alt="Panasonic Präzisionsschneider"
             fill
+            quality={100}
             className="object-contain"
             sizes="(max-width: 768px) 100vw, 480px"
           />
@@ -150,6 +151,7 @@ export default function MachineExperience() {
                 alt="Panasonic Präzisionsschneider"
                 fill
                 priority={i === 0}
+                quality={100}
                 className="object-contain"
                 sizes="100vw"
               />
@@ -165,7 +167,7 @@ export default function MachineExperience() {
               className={`pointer-events-none absolute h-24 w-24 opacity-0 sm:h-32 sm:w-32 md:h-36 md:w-36 ${detail.pos}`}
             >
               <div className="relative h-full w-full overflow-hidden rounded-full border border-champagne/50 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                <Image src={detail.src} alt={detail.label} fill className="object-cover" sizes="160px" />
+                <Image src={detail.src} alt={detail.label} fill quality={95} className="object-cover" sizes="160px" />
               </div>
               <span className="mt-2 block text-center text-[9px] uppercase tracking-[0.2em] text-champagne-light/90">
                 {detail.label}
