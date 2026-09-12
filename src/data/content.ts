@@ -33,6 +33,8 @@ export type TeamMember = {
   image: string;
 };
 
+export const teamGroupPhoto = "/images/team/group.jpg";
+
 export const team: TeamMember[] = [
   {
     name: "Simyan Chicho",

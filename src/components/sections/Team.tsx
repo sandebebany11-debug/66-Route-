@@ -1,5 +1,6 @@
-import { team } from "@/data/content";
+import { team, teamGroupPhoto } from "@/data/content";
 import TeamPortrait from "@/components/ui/TeamPortrait";
+import ImagePlate from "@/components/ui/ImagePlate";
 
 export default function Team() {
   return (
@@ -15,6 +16,13 @@ export default function Team() {
             <span className="italic">jedem Schnitt.</span>
           </h2>
         </div>
+
+        <ImagePlate
+          src={teamGroupPhoto}
+          alt="Das Team von Art of Hair by Simyan"
+          cursorLabel="MEET"
+          className="mb-16 aspect-[16/9] w-full md:aspect-[21/9]"
+        />
 
         <div className="grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-3 md:gap-x-8">
           {team.map((member, i) => (
