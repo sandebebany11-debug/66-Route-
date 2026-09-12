@@ -34,40 +34,59 @@ export default function ClipperModel({ progressRef }: { progressRef: ProgressRef
   const labelWrapRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const materials = useMemo(() => {
-    const body = new THREE.MeshPhysicalMaterial({
-      color: "#141311",
-      metalness: 0.55,
-      roughness: 0.32,
-      clearcoat: 0.6,
-      clearcoatRoughness: 0.25,
-      envMapIntensity: 1.1,
+    // Black rubberized grip (the clipper's lower body).
+    const rubber = new THREE.MeshPhysicalMaterial({
+      color: "#0d0d0d",
+      metalness: 0.05,
+      roughness: 0.75,
+      clearcoat: 0.15,
+      envMapIntensity: 0.6,
     });
-    const cover = new THREE.MeshPhysicalMaterial({
-      color: "#1d1b17",
-      metalness: 0.6,
-      roughness: 0.4,
-      clearcoat: 0.4,
-      envMapIntensity: 1,
+    // Polished silver-chrome housing (blade head, collar, dials, end cap).
+    const chrome = new THREE.MeshPhysicalMaterial({
+      color: "#cfd3d6",
+      metalness: 1,
+      roughness: 0.16,
+      clearcoat: 0.5,
+      clearcoatRoughness: 0.15,
+      envMapIntensity: 1.6,
     });
+    // Warm gold — precision motor, screws, blade-tip accents.
     const accent = new THREE.MeshPhysicalMaterial({
-      color: "#c9a668",
+      color: "#d4af37",
       metalness: 1,
       roughness: 0.22,
       envMapIntensity: 1.4,
     });
+    // Bright steel cutting blades.
     const blade = new THREE.MeshPhysicalMaterial({
-      color: "#dcdcd6",
+      color: "#e4e6e8",
       metalness: 1,
       roughness: 0.1,
       envMapIntensity: 1.6,
     });
-    const detail = new THREE.MeshPhysicalMaterial({
-      color: "#3a372f",
-      metalness: 0.7,
-      roughness: 0.35,
-      envMapIntensity: 1,
+    // Glossy black rubber oval control pad.
+    const button = new THREE.MeshPhysicalMaterial({
+      color: "#0a0a0a",
+      metalness: 0.1,
+      roughness: 0.4,
+      clearcoat: 0.6,
+      clearcoatRoughness: 0.2,
+      envMapIntensity: 0.8,
     });
-    return { body, cover, accent, blade, detail };
+    const ledGreen = new THREE.MeshStandardMaterial({
+      color: "#0a2a12",
+      emissive: "#4ade80",
+      emissiveIntensity: 1.4,
+      roughness: 0.3,
+    });
+    const ledRed = new THREE.MeshStandardMaterial({
+      color: "#2a0a0a",
+      emissive: "#ef4444",
+      emissiveIntensity: 1.4,
+      roughness: 0.3,
+    });
+    return { rubber, chrome, accent, blade, button, ledGreen, ledRed };
   }, []);
 
   useFrame((state, delta) => {
@@ -128,11 +147,27 @@ export default function ClipperModel({ progressRef }: { progressRef: ProgressRef
     switch (key) {
       case "handle":
         return (
-          <RoundedBox args={[0.62, 1.3, 0.42]} radius={0.09} smoothness={4} material={materials.body} />
+          <RoundedBox args={[0.62, 1.3, 0.42]} radius={0.09} smoothness={4} material={materials.rubber} />
         );
       case "backCover":
         return (
-          <RoundedBox args={[0.5, 0.86, 0.16]} radius={0.06} smoothness={4} material={materials.cover} />
+          <RoundedBox args={[0.5, 0.86, 0.16]} radius={0.06} smoothness={4} material={materials.rubber} />
+        );
+      case "controlButton":
+        return (
+          <mesh material={materials.button} scale={[1, 0.62, 0.38]}>
+            <sphereGeometry args={[0.19, 24, 16]} />
+          </mesh>
+        );
+      case "indicatorGreen":
+      case "indicatorRed":
+        return (
+          <mesh
+            material={key === "indicatorGreen" ? materials.ledGreen : materials.ledRed}
+            rotation={[Math.PI / 2, 0, 0]}
+          >
+            <cylinderGeometry args={[0.02, 0.02, 0.01, 16]} />
+          </mesh>
         );
       case "motorCore":
         return (
@@ -142,28 +177,28 @@ export default function ClipperModel({ progressRef }: { progressRef: ProgressRef
         );
       case "speedDial":
         return (
-          <mesh material={materials.detail} rotation={[Math.PI / 2, 0, 0]}>
+          <mesh material={materials.chrome} rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[0.09, 0.09, 0.12, 20]} />
           </mesh>
         );
       case "taperLever":
-        return <RoundedBox args={[0.08, 0.24, 0.05]} radius={0.02} material={materials.detail} />;
+        return <RoundedBox args={[0.08, 0.24, 0.05]} radius={0.02} material={materials.chrome} />;
       case "neckCollar":
         return (
-          <mesh material={materials.body}>
+          <mesh material={materials.chrome}>
             <cylinderGeometry args={[0.24, 0.29, 0.22, 28]} />
           </mesh>
         );
       case "bladeHousing":
         return (
-          <RoundedBox args={[0.58, 0.34, 0.5]} radius={0.07} smoothness={4} material={materials.body} />
+          <RoundedBox args={[0.58, 0.34, 0.5]} radius={0.07} smoothness={4} material={materials.chrome} />
         );
       case "combGuard":
         return (
           <group>
-            <RoundedBox args={[0.56, 0.1, 0.08]} radius={0.02} material={materials.detail} position={[0, 0.14, -0.02]} />
+            <RoundedBox args={[0.56, 0.1, 0.08]} radius={0.02} material={materials.chrome} position={[0, 0.14, -0.02]} />
             {Array.from({ length: 9 }).map((_, i) => (
-              <mesh key={i} material={materials.detail} position={[-0.24 + i * 0.06, -0.02, 0.08]}>
+              <mesh key={i} material={materials.accent} position={[-0.24 + i * 0.06, -0.02, 0.08]}>
                 <boxGeometry args={[0.03, 0.28, 0.16]} />
               </mesh>
             ))}
@@ -183,7 +218,7 @@ export default function ClipperModel({ progressRef }: { progressRef: ProgressRef
         );
       case "endCap":
         return (
-          <mesh material={materials.body}>
+          <mesh material={materials.chrome}>
             <cylinderGeometry args={[0.31, 0.28, 0.14, 28]} />
           </mesh>
         );
