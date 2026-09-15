@@ -195,15 +195,16 @@ em{font-style:italic;color:var(--terracotta)}
 }
 
 .hero-photo{
-  position:absolute;z-index:2;width:190px;aspect-ratio:1;border-radius:14px;overflow:hidden;
-  border:6px solid #fff;box-shadow:0 24px 40px -12px rgba(0,0,0,.55);
+  position:absolute;z-index:2;width:260px;aspect-ratio:1;border-radius:18px;overflow:hidden;
+  border:8px solid #fff;box-shadow:0 28px 48px -12px rgba(0,0,0,.55);
   transform:rotate(var(--rot,0deg)) translateY(var(--py,0px));
   transition:box-shadow .4s var(--ease);
 }
 .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-photo--1{top:16%;left:4%;--rot:-9deg}
-.hero-photo--2{bottom:16%;right:4%;width:170px;--rot:8deg}
-.hero-photo--1:hover,.hero-photo--2:hover{box-shadow:0 30px 50px -10px rgba(0,0,0,.6)}
+.hero-photo--1{top:14%;left:3%;--rot:-6deg}
+.hero-photo--2{bottom:12%;right:3%;width:230px;--rot:5deg}
+.hero-photo--1:hover,.hero-photo--2:hover{box-shadow:0 34px 56px -10px rgba(0,0,0,.6)}
+@media (max-width:1500px){.hero-photo{width:210px}.hero-photo--2{width:190px}}
 @media (max-width:1200px){.hero-photo{display:none}}
 
 .scroll-cue{
