@@ -19,7 +19,7 @@
     body.classList.remove("is-loading");
   });
   const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
-  Promise.race([fontsReady, new Promise(r => setTimeout(r, 700))]).then(start);
+  Promise.race([fontsReady, new Promise(r => setTimeout(r, 250))]).then(start);
 
   /* ---------- Image fallback: never show a broken image ---------- */
   $$(".media img").forEach(img => {
@@ -227,6 +227,7 @@
   /* ---------- Subtle 3D depth in hero (mouse) ---------- */
   if (finePointer && !reduced) {
     const layers = $$("[data-depth]", heroScene);
+    const reelEl = $(".hero__reel");
     let mx = 0, my = 0, cx = 0, cy = 0, raf = null;
     const loop = () => {
       cx += (mx - cx) * 0.06; cy += (my - cy) * 0.06;
@@ -234,6 +235,8 @@
         const d = parseFloat(l.dataset.depth);
         l.style.transform = `translate3d(${(cx * d * 14).toFixed(2)}px,${(cy * d * 10).toFixed(2)}px,0)`;
       });
+      reelEl.style.setProperty("--mx", cx.toFixed(3));
+      reelEl.style.setProperty("--my", cy.toFixed(3));
       raf = Math.abs(mx - cx) + Math.abs(my - cy) > 0.001 ? requestAnimationFrame(loop) : null;
     };
     heroSticky.addEventListener("pointermove", e => {
@@ -241,6 +244,64 @@
       if (!raf) raf = requestAnimationFrame(loop);
     });
     layers.forEach(l => (l.style.transition = "none"));
+  }
+
+  /* ---------- Hero film: loop, desktop reel, sound, progress ring ---------- */
+  {
+    const bgVid = $(".hero__video--bg");
+    const reelVid = $(".hero__video--reel");
+    const ring = $(".hero__reel-ring");
+    const soundBtn = $(".hero__sound");
+    const saveData = navigator.connection && navigator.connection.saveData;
+    const still = reduced || saveData;
+    const onDesktop = () => desktop.matches;
+    const audible = () => (onDesktop() ? reelVid : bgVid);
+    let heroVisible = true;
+
+    const safePlay = v => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const syncReel = () => {
+      if (!onDesktop() || still) return;
+      if (reelVid.preload === "none") { reelVid.preload = "auto"; reelVid.load(); }
+      if (Math.abs(reelVid.currentTime - bgVid.currentTime) > 0.3) reelVid.currentTime = bgVid.currentTime;
+      if (heroVisible) safePlay(reelVid);
+    };
+
+    if (still) {
+      bgVid.removeAttribute("autoplay"); bgVid.pause();
+      soundBtn.hidden = true;
+    } else {
+      safePlay(bgVid);
+      bgVid.addEventListener("playing", syncReel, { once: true });
+      if (bgVid.readyState >= 3) syncReel();
+      desktop.addEventListener("change", () => {
+        if (onDesktop()) syncReel(); else reelVid.pause();
+        if (soundBtn.getAttribute("aria-pressed") === "true") setSound(true);
+      });
+      // Only play while the hero is on screen
+      new IntersectionObserver(([e]) => {
+        heroVisible = e.isIntersecting;
+        if (heroVisible) { safePlay(bgVid); syncReel(); }
+        else { bgVid.pause(); reelVid.pause(); }
+      }).observe(heroSticky);
+    }
+
+    function setSound(on) {
+      bgVid.muted = true; reelVid.muted = true;
+      if (on) { const v = audible(); v.muted = false; safePlay(v); }
+      soundBtn.setAttribute("aria-pressed", on);
+      soundBtn.setAttribute("aria-label", on ? "Ton ausschalten" : "Ton einschalten");
+      $(".hero__sound-label", soundBtn).textContent = on ? "Ton aus" : "Ton an";
+    }
+    soundBtn.addEventListener("click", () => setSound(soundBtn.getAttribute("aria-pressed") !== "true"));
+
+    // Loop progress ring on the reel
+    if (!still && ring) {
+      const tick = () => {
+        if (heroVisible && onDesktop() && reelVid.duration) ring.style.setProperty("--t", (reelVid.currentTime / reelVid.duration).toFixed(4));
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
   }
 
   /* ---------- Custom cursor (desktop) ---------- */
