@@ -26,13 +26,11 @@ Hook (Hero) → Trust → Story → Steak-Showcase → Feuer → Speisekarte →
 
 ## Vor dem Livegang – bitte erledigen
 
-1. **Food-Fotos ersetzen.** Steak-, Grill- und Detailbilder sind derzeit Unsplash-Symbolbilder
-   (`images.unsplash.com`, im Code nach `unsplash` suchen). Sie durch echte ANGUS-Fotos ersetzen:
-   als WebP nach `assets/img/` legen und die `src`/`srcset`-Pfade austauschen. Echte Fotos wirken
-   besser und vermeiden, dass Besucher-IP-Adressen an einen Drittanbieter gehen (DSGVO).
-   Lädt ein Bild nicht, zeigt die Seite automatisch eine dunkle Glut-Fläche statt eines kaputten Bildes.
-2. **Restaurantfotos in höherer Auflösung.** Die vorhandenen Innenraumfotos haben nur ~360 px Breite;
-   für große Flächen am besten ≥ 1600 px liefern.
+1. **Fotos:** Alle Bilder sind echte ANGUS-Fotos (farblich angeglichen, als WebP in 640/1024/Originalbreite).
+   Für die großen Vollbild-Bereiche wären Originaldateien mit ≥ 2000 px Breite noch schärfer.
+   Auf dem Gastraum-Foto mit Gästen wurde die rechte Tischgruppe weggeschnitten; bitte trotzdem prüfen,
+   ob abgebildete Personen einverstanden sind. Beim Steak-Close-up (Hero) bitte sicherstellen, dass ihr die Bildrechte habt.
+2. **Weitere Wunschfotos:** Rinderfilet, Churrasco, Lammfilet, Grill/Feuer, Desserts – dann kann der Steak-Showcase erweitert werden.
 3. **Impressum und Datenschutz** vollständig ausfüllen.
 4. **Speisekarte:** Es sind bewusst keine Preise, Zutaten oder Beschreibungen hinterlegt. Die Schaltfläche
    „Vollständige Speisekarte“ führt zur Quandoo-Seite des Restaurants.

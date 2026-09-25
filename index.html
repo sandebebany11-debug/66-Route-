@@ -23,10 +23,7 @@
 
   <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-  <link rel="preload" as="image"
-        imagesrcset="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=72&w=900 900w, https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=72&w=1600 1600w, https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=72&w=2400 2400w"
-        imagesizes="100vw">
+  <link rel="preload" as="image" imagesrcset="assets/img/hero-steak-640.webp 640w, assets/img/hero-steak-1088.webp 1088w" imagesizes="100vw">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <script type="application/ld+json">
@@ -36,7 +33,7 @@
     "@id": "https://www.steakhausangus.de/#restaurant",
     "name": "Steakhaus-Restaurant ANGUS",
     "url": "https://www.steakhausangus.de/",
-    "image": "https://www.steakhausangus.de/assets/img/logo.png",
+    "image": ["https://www.steakhausangus.de/assets/img/og-image.jpg", "https://www.steakhausangus.de/assets/img/gastraum-laternen-1290.webp"],
     "logo": "https://www.steakhausangus.de/assets/img/logo.png",
     "telephone": "+49 214 2029955",
     "servesCuisine": ["Steakhouse", "Steaks", "Grill"],
@@ -123,11 +120,7 @@
             <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
           <div class="hero__media media" data-depth="0.6">
-            <img
-              src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=72&w=1600"
-              srcset="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=72&w=900 900w, https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=72&w=1600 1600w, https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=72&w=2400 2400w"
-              sizes="100vw" alt="Perfekt gegrilltes, aufgeschnittenes Steak mit Kruste in warmem Licht"
-              fetchpriority="high" decoding="async">
+            <img src="assets/img/hero-steak-1088.webp" srcset="assets/img/hero-steak-640.webp 640w, assets/img/hero-steak-1088.webp 1088w" sizes="100vw" alt="Gegrilltes Steak mit Grillmuster und Kruste, daneben Rosmarin und Pfefferkörner" width="1088" height="660" fetchpriority="high" decoding="async">
           </div>
           <canvas class="hero__smoke smoke" data-depth="1.2" aria-hidden="true"></canvas>
         </div>
@@ -189,16 +182,10 @@
     <section class="exp" id="erlebnis" aria-labelledby="exp-title">
       <div class="exp__media">
         <div class="exp__frame media reveal-img">
-          <img data-parallax="0.12"
-               src="assets/img/innenraum-fenster-362.webp"
-               alt="Innenraum des Steakhaus ANGUS mit Holztischen, Backsteinsäulen und warmem Licht"
-               width="362" height="240" loading="lazy" decoding="async">
+          <img data-parallax="0.12" src="assets/img/bar-1290.webp" srcset="assets/img/bar-640.webp 640w, assets/img/bar-1024.webp 1024w, assets/img/bar-1290.webp 1290w" sizes="(max-width: 900px) 80vw, 45vw" alt="Bar im Steakhaus ANGUS mit Weinfässern, Weinflaschen und hängenden Gläsern" width="1290" height="940" loading="lazy" decoding="async">
         </div>
         <div class="exp__frame exp__frame--small media reveal-img">
-          <img data-parallax="-0.1"
-               src="assets/img/innenraum-bar-362.webp"
-               alt="Bar im Steakhaus ANGUS mit ANGUS-Schriftzug an der Backsteintheke"
-               width="362" height="237" loading="lazy" decoding="async">
+          <img data-parallax="-0.1" src="assets/img/gastraum-laternen-1290.webp" srcset="assets/img/gastraum-laternen-640.webp 640w, assets/img/gastraum-laternen-1024.webp 1024w, assets/img/gastraum-laternen-1290.webp 1290w" sizes="(max-width: 900px) 45vw, 25vw" alt="Gastraum mit Holzstühlen, gedeckten Tischen und warmen Wandlaternen" width="1290" height="699" loading="lazy" decoding="async">
         </div>
         <span class="exp__tag">ANGUS · Ambience</span>
       </div>
@@ -224,48 +211,26 @@
         <header class="show__head">
           <p class="eyebrow">02 — Das Fleisch</p>
           <h2 id="show-title" class="h2">Meat worth<br><span class="gold">coming for.</span></h2>
-          <p class="show__count" aria-hidden="true"><span class="js-show-idx">01</span> / 05</p>
+          <p class="show__count" aria-hidden="true"><span class="js-show-idx">01</span> / 03</p>
         </header>
         <div class="show__track" tabindex="0" aria-label="Steak-Auswahl, horizontal scrollbar">
           <article class="slide">
             <div class="slide__media media">
-              <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=70&w=1400&crop=entropy"
-                   srcset="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=70&w=700 700w, https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=70&w=1400 1400w"
-                   sizes="(max-width: 800px) 85vw, 60vw" alt="Rinderfilet, medium gegrillt und aufgeschnitten (Symbolbild)" loading="lazy" decoding="async">
+              <img src="assets/img/tbone-1277.webp" srcset="assets/img/tbone-640.webp 640w, assets/img/tbone-1024.webp 1024w, assets/img/tbone-1277.webp 1277w" sizes="(max-width: 900px) 84vw, 60vw" alt="T-Bone-Steak mit Grillmuster, dazu grüne Bohnen und Bratkartoffeln" width="1277" height="931" loading="lazy" decoding="async">
             </div>
-            <div class="slide__cap"><span>01</span><h3>Rinderfilet</h3></div>
+            <div class="slide__cap"><span>01</span><h3>T-Bone</h3></div>
           </article>
           <article class="slide">
             <div class="slide__media media">
-              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=70&w=1400"
-                   srcset="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=70&w=700 700w, https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=70&w=1400 1400w"
-                   sizes="(max-width: 800px) 85vw, 60vw" alt="T-Bone-Steak vom Grill (Symbolbild)" loading="lazy" decoding="async">
+              <img src="assets/img/steak-pommes-quer-1290.webp" srcset="assets/img/steak-pommes-quer-640.webp 640w, assets/img/steak-pommes-quer-1024.webp 1024w, assets/img/steak-pommes-quer-1290.webp 1290w" sizes="(max-width: 900px) 84vw, 60vw" alt="Gegrilltes Steak mit Pommes frites und gemischtem Salat" width="1290" height="806" loading="lazy" decoding="async">
             </div>
-            <div class="slide__cap"><span>02</span><h3>T-Bone</h3></div>
+            <div class="slide__cap"><span>02</span><h3>Steak · Pommes · Salat</h3></div>
           </article>
           <article class="slide">
             <div class="slide__media media">
-              <img src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=70&w=1400"
-                   srcset="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=70&w=700 700w, https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=70&w=1400 1400w"
-                   sizes="(max-width: 800px) 85vw, 60vw" alt="Rumpsteak auf dem Grillrost mit Flammen (Symbolbild)" loading="lazy" decoding="async">
+              <img src="assets/img/steak-bratkartoffeln-1290.webp" srcset="assets/img/steak-bratkartoffeln-640.webp 640w, assets/img/steak-bratkartoffeln-1024.webp 1024w, assets/img/steak-bratkartoffeln-1290.webp 1290w" sizes="(max-width: 900px) 84vw, 60vw" alt="Gegrilltes Steak mit Bratkartoffeln und Speck" width="1290" height="944" loading="lazy" decoding="async">
             </div>
-            <div class="slide__cap"><span>03</span><h3>Rumpsteak</h3></div>
-          </article>
-          <article class="slide">
-            <div class="slide__media media">
-              <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=70&w=1400"
-                   srcset="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=70&w=700 700w, https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=70&w=1400 1400w"
-                   sizes="(max-width: 800px) 85vw, 60vw" alt="Churrasco-Spieße über glühender Kohle (Symbolbild)" loading="lazy" decoding="async">
-            </div>
-            <div class="slide__cap"><span>04</span><h3>Churrasco</h3></div>
-          </article>
-          <article class="slide">
-            <div class="slide__media media">
-              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=70&w=1400"
-                   srcset="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=70&w=700 700w, https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=70&w=1400 1400w"
-                   sizes="(max-width: 800px) 85vw, 60vw" alt="Lammfilet vom Grill (Symbolbild)" loading="lazy" decoding="async">
-            </div>
-            <div class="slide__cap"><span>05</span><h3>Lammfilet</h3></div>
+            <div class="slide__cap"><span>03</span><h3>Steak · Bratkartoffeln</h3></div>
           </article>
         </div>
         <div class="show__bar" aria-hidden="true"><i class="js-show-bar"></i></div>
@@ -275,10 +240,7 @@
     <!-- ============ 5 · FIRE ============ -->
     <section class="fire" aria-labelledby="fire-title">
       <div class="fire__bg media">
-        <img data-parallax="0.18"
-             src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=65&w=1800"
-             srcset="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=65&w=900 900w, https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=65&w=1800 1800w"
-             sizes="100vw" alt="Steak auf dem Grillrost über offenem Feuer" loading="lazy" decoding="async">
+        <img data-parallax="0.18" src="assets/img/tbone-1277.webp" srcset="assets/img/tbone-640.webp 640w, assets/img/tbone-1024.webp 1024w, assets/img/tbone-1277.webp 1277w" sizes="100vw" alt="" role="presentation" width="1277" height="931" loading="lazy" decoding="async">
       </div>
       <canvas class="fire__embers" aria-hidden="true"></canvas>
       <div class="fire__glow" aria-hidden="true"></div>
@@ -338,9 +300,7 @@
     <section class="moment" aria-labelledby="moment-title">
       <div class="moment__sticky">
         <div class="moment__media media">
-          <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=70&w=1800"
-               srcset="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=70&w=900 900w, https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=70&w=1800 1800w, https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=70&w=2600 2600w"
-               sizes="100vw" alt="Gegrilltes Steak mit Kräutern im Close-up" loading="lazy" decoding="async">
+          <img src="assets/img/steak-bratkartoffeln-1290.webp" srcset="assets/img/steak-bratkartoffeln-640.webp 640w, assets/img/steak-bratkartoffeln-1024.webp 1024w, assets/img/steak-bratkartoffeln-1290.webp 1290w" sizes="100vw" alt="Nahaufnahme: gegrilltes Steak mit Bratkartoffeln" width="1290" height="944" loading="lazy" decoding="async">
         </div>
         <div class="moment__shade" aria-hidden="true"></div>
         <div class="moment__content">
@@ -358,28 +318,28 @@
       </header>
       <div class="gallery__grid">
         <figure class="g g--a media reveal-img">
-          <img src="assets/img/innenraum-fenster-362.webp" alt="Gedeckte Holztische im Steakhaus ANGUS am Fenster" width="362" height="240" loading="lazy" decoding="async">
-          <figcaption>ANGUS · Ambience</figcaption>
+          <img src="assets/img/gastraum-840.webp" srcset="assets/img/gastraum-640.webp 640w, assets/img/gastraum-840.webp 840w" sizes="(max-width: 900px) 100vw, 58vw" alt="Gastraum mit Weinlaub an der Decke, Blick auf die Terrasse mit roten Markisen" width="840" height="945" loading="lazy" decoding="async">
+          <figcaption>ANGUS · Gastraum</figcaption>
         </figure>
         <figure class="g g--b media reveal-img">
-          <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=70&w=900&h=1200" alt="Aufgeschnittenes Steak auf Holzbrett (Symbolbild)" loading="lazy" decoding="async">
-          <figcaption>ANGUS · Steak</figcaption>
+          <img src="assets/img/cocktails-1275.webp" srcset="assets/img/cocktails-640.webp 640w, assets/img/cocktails-1024.webp 1024w, assets/img/cocktails-1275.webp 1275w" sizes="(max-width: 900px) 50vw, 42vw" alt="Zwei Cocktails mit Wassermelone, Johannisbeeren und Minze an der Bar" width="1275" height="1488" loading="lazy" decoding="async">
+          <figcaption>ANGUS · Drinks</figcaption>
         </figure>
         <figure class="g g--c media reveal-img">
-          <img src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=70&w=900&h=900" alt="Flammen am Grill (Symbolbild)" loading="lazy" decoding="async">
-          <figcaption>ANGUS · Fire</figcaption>
+          <img src="assets/img/steak-pommes-1290.webp" srcset="assets/img/steak-pommes-640.webp 640w, assets/img/steak-pommes-1024.webp 1024w, assets/img/steak-pommes-1290.webp 1290w" sizes="(max-width: 900px) 50vw, 25vw" alt="Steak mit Pommes frites und Salat auf weißem Teller" width="1290" height="1707" loading="lazy" decoding="async">
+          <figcaption>ANGUS · Steak</figcaption>
+        </figure>
+        <figure class="g g--f media reveal-img">
+          <img src="assets/img/gastraum-laternen-1290.webp" srcset="assets/img/gastraum-laternen-640.webp 640w, assets/img/gastraum-laternen-1024.webp 1024w, assets/img/gastraum-laternen-1290.webp 1290w" sizes="(max-width: 900px) 50vw, 17vw" alt="Gedeckte Tische im Schein der Wandlaternen" width="1290" height="699" loading="lazy" decoding="async">
+          <figcaption>ANGUS · Ambience</figcaption>
         </figure>
         <figure class="g g--d media reveal-img">
-          <img src="assets/img/innenraum-bar-362.webp" alt="Bar mit Backsteintheke und ANGUS-Schriftzug" width="362" height="237" loading="lazy" decoding="async">
+          <img src="assets/img/bar-1290.webp" srcset="assets/img/bar-640.webp 640w, assets/img/bar-1024.webp 1024w, assets/img/bar-1290.webp 1290w" sizes="(max-width: 900px) 50vw, 33vw" alt="Bar mit Weinfässern und Weinregal" width="1290" height="940" loading="lazy" decoding="async">
           <figcaption>ANGUS · Bar</figcaption>
         </figure>
         <figure class="g g--e media reveal-img">
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=70&w=900&h=1100" alt="Gedeckter Tisch mit Gläsern und Besteck (Symbolbild)" loading="lazy" decoding="async">
-          <figcaption>ANGUS · Details</figcaption>
-        </figure>
-        <figure class="g g--f media reveal-img">
-          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=70&w=1400&h=800" alt="Spieße auf dem Grill (Symbolbild)" loading="lazy" decoding="async">
-          <figcaption>ANGUS · Grill</figcaption>
+          <img src="assets/img/aussen-nacht-1290.webp" srcset="assets/img/aussen-nacht-640.webp 640w, assets/img/aussen-nacht-1024.webp 1024w, assets/img/aussen-nacht-1290.webp 1290w" sizes="(max-width: 900px) 50vw, 25vw" alt="Leuchtschild „Angus Steakhaus-Restaurant“ bei Nacht" width="1290" height="1699" loading="lazy" decoding="async">
+          <figcaption>ANGUS · Alkenrath</figcaption>
         </figure>
       </div>
     </section>
@@ -414,7 +374,7 @@
     <!-- ============ 10 · RESERVATION ============ -->
     <section class="reserve" id="reservierung" aria-labelledby="res-title">
       <div class="reserve__bg media">
-        <img data-parallax="0.15" src="assets/img/ambiente-backstein-757.webp" alt="" width="757" height="505" loading="lazy" decoding="async">
+        <img data-parallax="0.15" src="assets/img/aussen-nacht-1290.webp" srcset="assets/img/aussen-nacht-640.webp 640w, assets/img/aussen-nacht-1024.webp 1024w, assets/img/aussen-nacht-1290.webp 1290w" sizes="100vw" alt="" width="1290" height="1699" loading="lazy" decoding="async">
       </div>
       <canvas class="reserve__smoke smoke" aria-hidden="true"></canvas>
       <div class="reserve__shade" aria-hidden="true"></div>
@@ -472,7 +432,7 @@
       <a class="ulink" href="impressum.html">Impressum</a>
       <a class="ulink" href="datenschutz.html">Datenschutz</a>
     </nav>
-    <p class="foot__legal">© <span class="js-year">2026</span> Steakhaus-Restaurant ANGUS · Alkenrather Str. 6 · 51377 Leverkusen · Food-Fotografie teilweise Symbolbilder.</p>
+    <p class="foot__legal">© <span class="js-year">2026</span> Steakhaus-Restaurant ANGUS · Alkenrather Str. 6 · 51377 Leverkusen</p>
   </footer>
 
   <!-- Mobile sticky reservation bar -->
