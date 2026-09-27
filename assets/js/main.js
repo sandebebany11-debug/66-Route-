@@ -14,9 +14,19 @@
     (navigator.connection && navigator.connection.saveData) || reduced;
 
   /* ---------- Intro sequence ---------- */
+  const heroEl = document.querySelector(".hero");
+  const phoneIntro = !reduced && matchMedia("(max-width: 900px)").matches && scrollY < 40;
+  const endIntro = () => { heroEl.classList.remove("hero-intro"); body.classList.remove("hero-intro-active"); };
+  if (phoneIntro) body.classList.add("hero-intro-active"); else endIntro();
   const start = () => requestAnimationFrame(() => {
     body.classList.add("is-ready");
     body.classList.remove("is-loading");
+    if (phoneIntro) {
+      const t = setTimeout(endIntro, 1500);
+      // any interaction skips straight to the full hero
+      ["pointerdown", "wheel", "touchmove", "keydown"].forEach(ev =>
+        addEventListener(ev, () => { clearTimeout(t); endIntro(); }, { once: true, passive: true }));
+    }
   });
   const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
   Promise.race([fontsReady, new Promise(r => setTimeout(r, 250))]).then(start);
@@ -31,7 +41,7 @@
   /* ---------- Navigation ---------- */
   const nav = $("#nav");
   const burger = $(".nav__burger");
-  const mmenu = $("#mobile-menu");
+  const mmenu = $("#site-menu");
   const setMenu = open => {
     body.classList.toggle("menu-open", open);
     burger.setAttribute("aria-expanded", open);
@@ -40,6 +50,7 @@
   };
   burger.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
   $$("a", mmenu).forEach(a => a.addEventListener("click", () => setMenu(false)));
+  $$(".js-reserve").forEach(a => a.addEventListener("click", () => setMenu(false)));
   addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
   /* ---------- Reveal on scroll ---------- */
@@ -246,7 +257,7 @@
     layers.forEach(l => (l.style.transition = "none"));
   }
 
-  /* ---------- Hero film: loop, desktop reel, sound, progress ring ---------- */
+  /* ---------- Hero film: sharp reel everywhere, blurred copy behind on desktop ---------- */
   {
     const bgVid = $(".hero__video--bg");
     const reelVid = $(".hero__video--reel");
@@ -255,53 +266,146 @@
     const saveData = navigator.connection && navigator.connection.saveData;
     const still = reduced || saveData;
     const onDesktop = () => desktop.matches;
-    const audible = () => (onDesktop() ? reelVid : bgVid);
     let heroVisible = true;
 
     const safePlay = v => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
-    const syncReel = () => {
-      if (!onDesktop() || still) return;
-      if (reelVid.preload === "none") { reelVid.preload = "auto"; reelVid.load(); }
-      if (Math.abs(reelVid.currentTime - bgVid.currentTime) > 0.3) reelVid.currentTime = bgVid.currentTime;
-      if (heroVisible) safePlay(reelVid);
+    const load = v => { if (v.preload !== "auto") { v.preload = "auto"; v.load(); } };
+    const run = () => {
+      if (still || !heroVisible) return;
+      load(reelVid); safePlay(reelVid);
+      if (onDesktop()) {
+        load(bgVid);
+        if (Math.abs(bgVid.currentTime - reelVid.currentTime) > 0.3) bgVid.currentTime = reelVid.currentTime;
+        safePlay(bgVid);
+      } else bgVid.pause(); // phones: one decoder only, the poster stays blurred behind
     };
 
     if (still) {
-      bgVid.removeAttribute("autoplay"); bgVid.pause();
       soundBtn.hidden = true;
     } else {
-      safePlay(bgVid);
-      bgVid.addEventListener("playing", syncReel, { once: true });
-      if (bgVid.readyState >= 3) syncReel();
-      desktop.addEventListener("change", () => {
-        if (onDesktop()) syncReel(); else reelVid.pause();
-        if (soundBtn.getAttribute("aria-pressed") === "true") setSound(true);
-      });
-      // Only play while the hero is on screen
+      run();
+      desktop.addEventListener("change", run);
       new IntersectionObserver(([e]) => {
         heroVisible = e.isIntersecting;
-        if (heroVisible) { safePlay(bgVid); syncReel(); }
-        else { bgVid.pause(); reelVid.pause(); }
+        if (heroVisible) run(); else { bgVid.pause(); reelVid.pause(); }
       }).observe(heroSticky);
     }
 
-    function setSound(on) {
-      bgVid.muted = true; reelVid.muted = true;
-      if (on) { const v = audible(); v.muted = false; safePlay(v); }
+    const setSound = on => {
+      reelVid.muted = !on; bgVid.muted = true;
+      if (on) safePlay(reelVid);
       soundBtn.setAttribute("aria-pressed", on);
       soundBtn.setAttribute("aria-label", on ? "Ton ausschalten" : "Ton einschalten");
       $(".hero__sound-label", soundBtn).textContent = on ? "Ton aus" : "Ton an";
-    }
+    };
     soundBtn.addEventListener("click", () => setSound(soundBtn.getAttribute("aria-pressed") !== "true"));
 
     // Loop progress ring on the reel
     if (!still && ring) {
       const tick = () => {
-        if (heroVisible && onDesktop() && reelVid.duration) ring.style.setProperty("--t", (reelVid.currentTime / reelVid.duration).toFixed(4));
+        if (heroVisible && reelVid.duration) ring.style.setProperty("--t", (reelVid.currentTime / reelVid.duration).toFixed(4));
         requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
     }
+  }
+
+  /* ---------- Reservation form (same flow as Casa Ducale) ---------- */
+  /* ==== EINSTELLUNGEN – nur diese Werte eintragen ====
+     web3formsKey:   Zugangsschlüssel von https://web3forms.com (kostenlos). Reservierungen gehen an die
+                     E-Mail-Adresse, mit der der Schlüssel erstellt wurde. Leer = Demo-Modus (nichts wird verschickt).
+     whatsappNumber: WhatsApp-Nummer des Restaurants, international ohne + und Leerzeichen, z. B. '4917612345678'.
+                     Leer = WhatsApp-Button bleibt ausgeblendet. */
+  const RESERVATION_CONFIG = {
+    web3formsKey: "",
+    whatsappNumber: "",
+    restaurantPhone: "0214 2029955",
+    restaurantPhoneLink: "tel:+492142029955"
+  };
+  {
+    const form = $("#reserveForm");
+    const success = $("#formSuccess");
+    const successText = $("#formSuccessText");
+    const submitBtn = $("#reserveSubmit");
+    const waBtn = $("#reserveWhatsApp");
+    const errorBox = $("#reserveError");
+    const f = form.elements;
+
+    // no dates in the past
+    const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    f.datum.min = today.toISOString().slice(0, 10);
+
+    const readForm = () => ({
+      name: f.name.value.trim(), telefon: f.telefon.value.trim(), email: f.email.value.trim(),
+      datum: f.datum.value ? new Date(f.datum.value + "T00:00").toLocaleDateString("de-DE", { weekday: "long", day: "2-digit", month: "2-digit", year: "numeric" }) : "",
+      uhrzeit: f.uhrzeit.value, personen: (form.querySelector("input[name=personen]:checked") || {}).value || "",
+      anmerkungen: f.anmerkungen.value.trim()
+    });
+    const showError = html => { errorBox.innerHTML = html; errorBox.hidden = false; };
+    const showSuccess = text => {
+      if (text) successText.textContent = text;
+      form.hidden = true;
+      success.hidden = false;
+      success.focus({ preventScroll: true });
+      success.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+    };
+
+    if (RESERVATION_CONFIG.whatsappNumber) {
+      waBtn.hidden = false;
+      waBtn.addEventListener("click", () => {
+        if (!form.reportValidity()) return;
+        const d = readForm();
+        const text = [
+          "Hallo ANGUS, ich möchte gern einen Tisch reservieren:", "",
+          `Name: ${d.name}`, `Datum: ${d.datum}`, `Uhrzeit: ${d.uhrzeit} Uhr`, `Personen: ${d.personen}`, `Telefon: ${d.telefon}`,
+          d.anmerkungen ? `Anmerkungen: ${d.anmerkungen}` : ""
+        ].filter(Boolean).join("\n");
+        window.open(`https://wa.me/${RESERVATION_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+        showSuccess("Deine Nachricht ist in WhatsApp vorbereitet – einfach dort auf „Senden“ tippen. Wir bestätigen deinen Tisch so schnell wie möglich.");
+      });
+    }
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      errorBox.hidden = true;
+      if (f.botcheck.checked) return; // spam bot
+      if (!form.reportValidity()) return;
+
+      if (!RESERVATION_CONFIG.web3formsKey) { // demo mode
+        console.warn("Reservierung: kein Web3Forms-Schlüssel eingetragen – Demo-Modus, es wurde nichts verschickt.");
+        showSuccess();
+        return;
+      }
+
+      const d = readForm();
+      const label = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Wird gesendet …";
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: RESERVATION_CONFIG.web3formsKey,
+            subject: `Neue Tischreservierung: ${d.personen}, ${d.datum}, ${d.uhrzeit} Uhr`,
+            from_name: "ANGUS Website",
+            replyto: d.email || undefined,
+            Name: d.name, Telefon: d.telefon, "E-Mail": d.email || "–",
+            Datum: d.datum, Uhrzeit: d.uhrzeit + " Uhr", Personen: d.personen,
+            Anmerkungen: d.anmerkungen || "–"
+          })
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.success) throw new Error(json.message || res.status);
+        showSuccess();
+      } catch (err) {
+        console.error("Reservierung fehlgeschlagen:", err);
+        showError(`Das Senden hat leider nicht geklappt. Bitte ruf uns kurz an: <a href="${RESERVATION_CONFIG.restaurantPhoneLink}">${RESERVATION_CONFIG.restaurantPhone}</a>`);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = label;
+      }
+    });
   }
 
   /* ---------- Custom cursor (desktop) ---------- */

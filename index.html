@@ -80,44 +80,50 @@
       <img src="assets/img/logo.webp" alt="Steakhaus ANGUS Logo" width="44" height="44">
       <span class="nav__word">ANGUS</span>
     </a>
-    <nav class="nav__links" aria-label="Hauptnavigation">
-      <a href="#erlebnis" class="ulink">Über uns</a>
-      <a href="#steaks" class="ulink">Steaks</a>
-      <a href="#speisekarte" class="ulink">Speisekarte</a>
-      <a href="#galerie" class="ulink">Galerie</a>
-      <a href="#bewertungen" class="ulink">Bewertungen</a>
-      <a href="#kontakt" class="ulink">Kontakt</a>
-    </nav>
     <div class="nav__actions">
       <a href="tel:+492142029955" class="nav__phone ulink" aria-label="Anrufen: 0214 2029955">0214 2029955</a>
-      <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold btn--sm js-reserve" target="_blank" rel="noopener">Tisch reservieren</a>
-      <button class="nav__burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+      <a href="#reservierung" class="btn btn--gold btn--sm js-reserve">Tisch reservieren</a>
+      <button class="nav__burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="site-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <div class="mmenu" id="mobile-menu" aria-hidden="true">
-    <nav aria-label="Mobile Navigation">
-      <a href="#erlebnis">Über uns</a>
-      <a href="#steaks">Steaks</a>
-      <a href="#speisekarte">Speisekarte</a>
-      <a href="#galerie">Galerie</a>
-      <a href="#bewertungen">Bewertungen</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-    <div class="mmenu__foot">
-      <a href="tel:+492142029955" class="btn btn--ghost">Anrufen</a>
-      <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold js-reserve" target="_blank" rel="noopener">Tisch reservieren</a>
+  <div class="mmenu" id="site-menu" aria-hidden="true">
+    <div class="mmenu__inner">
+      <nav class="mmenu__nav" aria-label="Hauptnavigation">
+        <a href="#top"><span>01</span>Startseite</a>
+        <a href="#erlebnis"><span>02</span>Über uns</a>
+        <a href="#steaks"><span>03</span>Steaks</a>
+        <a href="#speisekarte"><span>04</span>Speisekarte</a>
+        <a href="#galerie"><span>05</span>Galerie</a>
+        <a href="#bewertungen"><span>06</span>Bewertungen</a>
+        <a href="#reservierung"><span>07</span>Reservierung</a>
+        <a href="#kontakt"><span>08</span>Kontakt</a>
+      </nav>
+      <aside class="mmenu__side">
+        <figure class="mmenu__photo media">
+          <img src="assets/img/gastraum-laternen-640.webp" alt="Gastraum im ANGUS mit Wandlaternen" width="640" height="347" loading="lazy" decoding="async">
+        </figure>
+        <p class="mmenu__label">Steakhaus-Restaurant ANGUS</p>
+        <p class="mmenu__addr">Alkenrather Str. 6 · 51377 Leverkusen</p>
+        <a class="mmenu__tel ulink" href="tel:+492142029955">0214 2029955</a>
+        <div class="mmenu__foot">
+          <a href="tel:+492142029955" class="btn btn--ghost">Anrufen</a>
+          <a href="#reservierung" class="btn btn--gold js-reserve">Tisch reservieren</a>
+        </div>
+      </aside>
     </div>
   </div>
 
   <main id="main">
 
     <!-- ============ 1 · HOOK / HERO ============ -->
-    <section class="hero" id="top" aria-label="Willkommen bei ANGUS">
+    <section class="hero hero-intro" id="top" aria-label="Willkommen bei ANGUS">
       <div class="hero__sticky">
         <div class="hero__scene" data-depth-scene>
           <div class="hero__media media" data-depth="0.4">
-            <video class="hero__video hero__video--bg" autoplay muted loop playsinline preload="auto"
+            <video class="hero__video hero__video--bg" muted loop playsinline preload="none"
                    poster="assets/img/grill-poster.webp" aria-hidden="true" tabindex="-1">
               <source src="assets/video/grill-720.webm" type="video/webm">
               <source src="assets/video/grill-720.mp4" type="video/mp4">
@@ -131,12 +137,16 @@
 
         <figure class="hero__reel" data-depth-reel>
           <div class="hero__reel-frame">
-            <video class="hero__video hero__video--reel" muted loop playsinline preload="none"
+            <video class="hero__video hero__video--reel" muted loop playsinline preload="auto"
                    poster="assets/img/grill-poster.webp" aria-label="Video: Steaks auf dem Grill im ANGUS, Flammen schlagen hoch">
               <source src="assets/video/grill-720.webm" type="video/webm">
               <source src="assets/video/grill-720.mp4" type="video/mp4">
             </video>
             <span class="hero__reel-ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/></svg></span>
+          </div>
+          <div class="hero__intro-mark" aria-hidden="true">
+            <img src="assets/img/logo.webp" alt="" width="64" height="64">
+            <span>Steakhaus · Leverkusen</span>
           </div>
           <figcaption><i aria-hidden="true"></i>Frisch vom Grill · ANGUS Alkenrath</figcaption>
         </figure>
@@ -163,10 +173,10 @@
             <p class="hero__lead">Hochwertiges Fleisch, perfekt gegrillt und serviert in echter Steakhouse-Atmosphäre.</p>
           </div>
           <div class="hero__cta">
-            <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold btn--lg js-reserve" target="_blank" rel="noopener">
+            <a href="#reservierung" class="btn btn--gold btn--lg js-reserve">
               Tisch reservieren <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="#speisekarte" class="btn btn--ghost btn--lg">Speisekarte entdecken</a>
+            <a href="#speisekarte" class="btn btn--ghost btn--lg">Speisekarte<span class="hide-sm">&nbsp;entdecken</span></a>
           </div>
         </div>
       </div>
@@ -256,15 +266,21 @@
 
     <!-- ============ 5 · FIRE ============ -->
     <section class="fire" aria-labelledby="fire-title">
-      <div class="fire__bg media">
-        <img data-parallax="0.18" src="assets/img/tbone-1277.webp" srcset="assets/img/tbone-640.webp 640w, assets/img/tbone-1024.webp 1024w, assets/img/tbone-1277.webp 1277w" sizes="100vw" alt="" role="presentation" width="1277" height="931" loading="lazy" decoding="async">
+      <div class="fire__backdrop" aria-hidden="true">
+        <img src="assets/img/tbone-640.webp" alt="" width="640" height="467" loading="lazy" decoding="async">
       </div>
       <canvas class="fire__embers" aria-hidden="true"></canvas>
       <div class="fire__glow" aria-hidden="true"></div>
-      <div class="fire__content">
-        <p class="eyebrow reveal">03 — Das Feuer</p>
-        <h2 id="fire-title" class="display reveal">From fire<br><span class="gold">to flavor.</span></h2>
-        <p class="fire__text reveal">„Wenn Hitze auf hochwertiges Fleisch trifft, entsteht mehr als ein Steak.“</p>
+      <div class="fire__inner">
+        <div class="fire__content">
+          <p class="eyebrow reveal">03 — Das Feuer</p>
+          <h2 id="fire-title" class="display reveal">From fire<br><span class="gold">to flavor.</span></h2>
+          <p class="fire__text reveal">„Wenn Hitze auf hochwertiges Fleisch trifft, entsteht mehr als ein Steak.“</p>
+        </div>
+        <figure class="fire__photo media reveal-img">
+          <img src="assets/img/tbone-1277.webp" srcset="assets/img/tbone-640.webp 640w, assets/img/tbone-1024.webp 1024w, assets/img/tbone-1277.webp 1277w" sizes="(max-width: 900px) 92vw, 55vw" alt="T-Bone-Steak mit Grillmuster, dazu grüne Bohnen, Bratkartoffeln und Sauce" width="1277" height="931" loading="lazy" decoding="async">
+          <figcaption>T-Bone · ANGUS</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -309,21 +325,23 @@
 
       <div class="menu__cta reveal">
         <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--ghost" target="_blank" rel="noopener">Vollständige Speisekarte</a>
-        <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold js-reserve" target="_blank" rel="noopener">Tisch reservieren</a>
+        <a href="#reservierung" class="btn btn--gold js-reserve">Tisch reservieren</a>
       </div>
     </section>
 
     <!-- ============ 7 · FOOD MOMENT ============ -->
     <section class="moment" aria-labelledby="moment-title">
       <div class="moment__sticky">
-        <div class="moment__media media">
-          <img src="assets/img/steak-bratkartoffeln-1290.webp" srcset="assets/img/steak-bratkartoffeln-640.webp 640w, assets/img/steak-bratkartoffeln-1024.webp 1024w, assets/img/steak-bratkartoffeln-1290.webp 1290w" sizes="100vw" alt="Nahaufnahme: gegrilltes Steak mit Bratkartoffeln" width="1290" height="944" loading="lazy" decoding="async">
+        <div class="moment__backdrop" aria-hidden="true">
+          <img src="assets/img/steak-bratkartoffeln-640.webp" alt="" width="640" height="468" loading="lazy" decoding="async">
         </div>
-        <div class="moment__shade" aria-hidden="true"></div>
         <div class="moment__content">
-          <h2 id="moment-title" class="display">Perfectly<br><span class="gold">grilled.</span></h2>
+          <h2 id="moment-title" class="display">Perfectly <span class="gold">grilled.</span></h2>
           <p>Mehr muss man manchmal nicht sagen.</p>
         </div>
+        <figure class="moment__photo media">
+          <img src="assets/img/steak-bratkartoffeln-1290.webp" srcset="assets/img/steak-bratkartoffeln-640.webp 640w, assets/img/steak-bratkartoffeln-1024.webp 1024w, assets/img/steak-bratkartoffeln-1290.webp 1290w" sizes="(max-width: 900px) 92vw, 70vw" alt="Gegrilltes Steak mit Bratkartoffeln und Speck auf weißem Teller" width="1290" height="944" loading="lazy" decoding="async">
+        </figure>
       </div>
     </section>
 
@@ -384,30 +402,69 @@
         </figure>
       </div>
       <div class="reviews__cta reveal">
-        <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold js-reserve" target="_blank" rel="noopener">Tisch reservieren</a>
+        <a href="#reservierung" class="btn btn--gold js-reserve">Tisch reservieren</a>
       </div>
     </section>
 
     <!-- ============ 10 · RESERVATION ============ -->
     <section class="reserve" id="reservierung" aria-labelledby="res-title">
-      <div class="reserve__bg media">
-        <img data-parallax="0.15" src="assets/img/aussen-nacht-1290.webp" srcset="assets/img/aussen-nacht-640.webp 640w, assets/img/aussen-nacht-1024.webp 1024w, assets/img/aussen-nacht-1290.webp 1290w" sizes="100vw" alt="" width="1290" height="1699" loading="lazy" decoding="async">
+      <div class="reserve__backdrop" aria-hidden="true">
+        <img src="assets/img/aussen-nacht-640.webp" alt="" width="640" height="843" loading="lazy" decoding="async">
       </div>
       <canvas class="reserve__smoke smoke" aria-hidden="true"></canvas>
       <div class="reserve__shade" aria-hidden="true"></div>
-      <div class="reserve__content">
-        <h2 id="res-title" class="display reserve__title">
-          <span class="line reveal"><span>Dein Tisch.</span></span>
-          <span class="line reveal"><span>Dein Abend.</span></span>
-          <span class="line reveal"><span class="gold">Dein Steak.</span></span>
-        </h2>
-        <p class="reserve__q reveal">Bereit für einen Abend bei ANGUS?</p>
-        <div class="reveal">
-          <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold btn--xl js-reserve" target="_blank" rel="noopener">
-            Jetzt Tisch reservieren <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+
+      <div class="reserve__grid">
+        <figure class="reserve__photo media reveal-img">
+          <img src="assets/img/aussen-nacht-1290.webp" srcset="assets/img/aussen-nacht-640.webp 640w, assets/img/aussen-nacht-1024.webp 1024w, assets/img/aussen-nacht-1290.webp 1290w" sizes="(max-width: 900px) 92vw, 38vw" alt="Leuchtschild „Angus Steakhaus-Restaurant“ über dem Eingang bei Nacht" width="1290" height="1699" loading="lazy" decoding="async">
+          <figcaption>Alkenrather Str. 6 · Leverkusen</figcaption>
+        </figure>
+
+        <div class="reserve__panel">
+          <h2 id="res-title" class="display reserve__title">
+            <span class="line reveal"><span>Dein Tisch.</span></span>
+            <span class="line reveal"><span>Dein Abend.</span></span>
+            <span class="line reveal"><span class="gold">Dein Steak.</span></span>
+          </h2>
+          <p class="reserve__q reveal">Bereit für einen Abend bei ANGUS? Reserviere in einer Minute.</p>
+
+          <form class="book reveal" id="reserveForm">
+            <fieldset class="book__people">
+              <legend>Personen</legend>
+              <div class="book__chips">
+                <label><input type="radio" name="personen" value="1 Person" required><span>1</span></label>
+                <label><input type="radio" name="personen" value="2 Personen" checked><span>2</span></label>
+                <label><input type="radio" name="personen" value="3 Personen"><span>3</span></label>
+                <label><input type="radio" name="personen" value="4 Personen"><span>4</span></label>
+                <label><input type="radio" name="personen" value="5 Personen"><span>5</span></label>
+                <label><input type="radio" name="personen" value="6 Personen"><span>6</span></label>
+                <label><input type="radio" name="personen" value="7 Personen"><span>7</span></label>
+                <label><input type="radio" name="personen" value="8+ Personen"><span>8+</span></label>
+              </div>
+            </fieldset>
+            <div class="book__field"><label for="rf-date">Datum</label><input id="rf-date" name="datum" type="date" required></div>
+            <div class="book__field"><label for="rf-time">Uhrzeit</label><input id="rf-time" name="uhrzeit" type="time" step="900" required></div>
+            <div class="book__field"><label for="rf-name">Name</label><input id="rf-name" name="name" type="text" required autocomplete="name" placeholder="Vor- und Nachname"></div>
+            <div class="book__field"><label for="rf-tel">Telefon</label><input id="rf-tel" name="telefon" type="tel" required autocomplete="tel" placeholder="Für Rückfragen"></div>
+            <div class="book__field book__field--full"><label for="rf-mail">E-Mail <small>(optional)</small></label><input id="rf-mail" name="email" type="email" autocomplete="email" placeholder="name@beispiel.de"></div>
+            <div class="book__field book__field--full"><label for="rf-note">Anmerkungen <small>(optional)</small></label><textarea id="rf-note" name="anmerkungen" rows="2" placeholder="Anlass, Allergien, Hund, Kinderstuhl, Terrasse …"></textarea></div>
+            <input type="checkbox" name="botcheck" class="book__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="book__consent"><input type="checkbox" id="rf-consent" name="datenschutz" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Reservierung gespeichert und verwendet werden. Mehr dazu in der <a class="ulink" href="datenschutz.html">Datenschutzerklärung</a>.</span></label>
+            <div class="book__actions">
+              <button type="submit" class="btn btn--gold btn--xl" id="reserveSubmit">Jetzt Tisch reservieren <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              <button type="button" class="btn btn--whatsapp" id="reserveWhatsApp" hidden>Per WhatsApp anfragen</button>
+              <p class="book__error" id="reserveError" role="alert" hidden></p>
+            </div>
+          </form>
+
+          <div class="book__success" id="formSuccess" hidden tabindex="-1">
+            <span class="book__success-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <h3>Reservierung angefragt!</h3>
+            <p id="formSuccessText">Danke! Wir melden uns in Kürze telefonisch, um deinen Tisch zu bestätigen.</p>
+          </div>
+
+          <p class="reserve__alt reveal">Lieber anrufen? <a class="ulink" href="tel:+492142029955">0214 2029955</a> · oder über <a class="ulink" href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" target="_blank" rel="noopener">Quandoo</a></p>
         </div>
-        <p class="reserve__alt reveal">Online über Quandoo – oder telefonisch unter <a class="ulink" href="tel:+492142029955">0214 2029955</a></p>
       </div>
     </section>
 
@@ -430,7 +487,7 @@
       <div class="contact__actions reveal">
         <a href="tel:+492142029955" class="btn btn--ghost">Anrufen</a>
         <a href="https://www.google.com/maps/dir/?api=1&destination=Steakhaus+ANGUS%2C+Alkenrather+Str.+6%2C+51377+Leverkusen" class="btn btn--ghost" target="_blank" rel="noopener">Route planen</a>
-        <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold js-reserve" target="_blank" rel="noopener">Tisch reservieren</a>
+        <a href="#reservierung" class="btn btn--gold js-reserve">Tisch reservieren</a>
       </div>
     </section>
   </main>
@@ -457,7 +514,7 @@
     <a href="tel:+492142029955" class="sticky-cta__call" aria-label="Anrufen" tabindex="-1">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
     </a>
-    <a href="https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782" class="btn btn--gold js-reserve" target="_blank" rel="noopener" tabindex="-1">Tisch reservieren</a>
+    <a href="#reservierung" class="btn btn--gold js-reserve" tabindex="-1">Tisch reservieren</a>
   </div>
 
   <script src="assets/js/main.js" defer></script>

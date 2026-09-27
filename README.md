@@ -43,6 +43,15 @@ nicht bestätigt vorlagen.
 
 ## Reservierung
 
+Die Seite hat ein eigenes Reservierungsformular (Bereich „Dein Tisch. Dein Abend. Dein Steak.“), aufgebaut wie bei Casa Ducale.
+Alle „Tisch reservieren“-Buttons springen dorthin. Einstellungen stehen oben im Block `RESERVATION_CONFIG` in `assets/js/main.js`:
+
+- `web3formsKey`: kostenloser Schlüssel von https://web3forms.com – Reservierungen kommen dann per E-Mail an.
+  **Solange er leer ist, läuft das Formular im Demo-Modus und verschickt nichts.**
+- `whatsappNumber`: z. B. `4917612345678` – dann erscheint zusätzlich „Per WhatsApp anfragen“.
+
+Quandoo bleibt als Alternative verlinkt:
+
 Alle „Tisch reservieren“-Buttons führen zu Quandoo:
 https://www.quandoo.de/place/nours-angus-restaurant-steakhaus-58782
 Wenn sich der Link ändert, alle Vorkommen in `index.html` ersetzen (Klasse `js-reserve`).
