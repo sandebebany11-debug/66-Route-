@@ -170,7 +170,12 @@
     ticking = false;
     const y = scrollY;
 
-    nav.classList.toggle("is-scrolled", y > 40);
+    // Laptop/desktop: while the hero film is on stage the bar stays transparent and the
+    // hero shows the only logo; the bar (with its logo) takes over once the hero is left behind.
+    const heroRect = hero.getBoundingClientRect();
+    const inHero = desktop.matches && heroRect.bottom > vh * 1.02;
+    nav.classList.toggle("is-scrolled", desktop.matches ? !inHero : y > 40);
+    body.classList.toggle("hero-brand", inHero && !hero.classList.contains("is-swapped") && y < heroRect.height);
 
     // Hero: steak recedes, light lines appear, headline swaps
     if (!reduced) {
@@ -178,6 +183,7 @@
       heroSticky.style.setProperty("--p", p.toFixed(4));
       heroScene.style.setProperty("--p", p.toFixed(4));
       hero.classList.toggle("is-swapped", p > 0.32);
+      body.classList.toggle("hero-brand", desktop.matches && p < 0.32 && hero.getBoundingClientRect().bottom > vh * 1.02);
     }
 
     // Steak showcase: vertical scroll → horizontal travel (desktop)
