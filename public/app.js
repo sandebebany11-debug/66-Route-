@@ -137,17 +137,12 @@
   showKategorie(S.kategorien[0].id);
 
   // ---------- Team ----------
-  const teamImgs = [
-    'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=700&q=80',
-    'https://images.unsplash.com/photo-1554519515-242161756769?auto=format&fit=crop&w=700&q=80',
-    'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=80',
-  ];
   $('#team-grid').innerHTML = S.team
     .map(
-      (t, i) => `<figure class="member reveal">
+      (t) => `<figure class="member reveal">
         <div class="member__portrait">
           <span class="member__initials" aria-hidden="true">${esc(t.initialen)}</span>
-          ${teamImgs[i] ? `<img src="${teamImgs[i]}" alt="" loading="lazy" onerror="this.remove()">` : ''}
+          ${t.bild ? `<img src="${esc(t.bild)}" alt="${esc(t.name)}, ${esc(t.rolle)}" loading="lazy" onerror="this.remove()">` : ''}
         </div>
         <figcaption><h3>${esc(t.name)}</h3><p>${esc(t.rolle)}</p></figcaption>
       </figure>`

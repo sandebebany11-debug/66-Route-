@@ -29,10 +29,11 @@
     slotMinuten: 30,
     vorlaufTage: 60,
 
+    // TODO: Namen und Rollen der Mitarbeiterinnen eintragen, weitere Personen einfach ergänzen
     team: [
-      { id: 'team-1', name: 'Inhaberin', rolle: 'Master Stylistin & Coloristin', initialen: 'AH' },
-      { id: 'team-2', name: 'Stylistin', rolle: 'Schnitt & Hochsteckfrisuren', initialen: 'ST' },
-      { id: 'team-3', name: 'Barber', rolle: 'Herrenschnitt & Bart', initialen: 'BA' },
+      { id: 'simyan', name: 'Simyan', rolle: 'Friseur', initialen: 'S', bild: 'images/simyan.jpg' },
+      { id: 'mitarbeiterin-1', name: 'Mitarbeiterin', rolle: 'Friseurin', initialen: 'M', bild: 'images/mitarbeiterin-1.jpg' },
+      { id: 'mitarbeiterin-2', name: 'Mitarbeiterin', rolle: 'Friseurin', initialen: 'M', bild: 'images/mitarbeiterin-2.jpg' },
     ],
 
     kategorien: [
