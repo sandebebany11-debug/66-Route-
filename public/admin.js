@@ -181,7 +181,13 @@
     const b = e.target.closest('[data-del]');
     if (!b) return;
     const r = all.find((x) => x.id === b.dataset.del);
-    if (!confirm(`Reservierung von ${r.name} am ${r.datum} um ${r.uhrzeit} Uhr endgültig löschen?\n\nTipp: „Storniert“ behält den Eintrag in der Liste.`)) return;
+    // Zweistufig bestätigen: erster Klick fragt nach, zweiter löscht
+    if (!b.classList.contains('is-armed')) {
+      b.classList.add('is-armed');
+      b.textContent = 'Wirklich löschen?';
+      setTimeout(() => render(), 4000);
+      return;
+    }
     try {
       await Store.remove(pin, r.id);
       all = all.filter((x) => x !== r);
@@ -202,7 +208,7 @@
   });
   $('#f-stylist').innerHTML += S.team.map((t) => `<option value="${t.id}">${esc(t.name)}</option>`).join('');
 
-  $('#export').addEventListener('click', () => {
+  $('#export') && $('#export').addEventListener('click', () => {
     const cols = ['id', 'datum', 'uhrzeit', 'dauer', 'name', 'telefon', 'email', 'leistungName', 'preis', 'stylist', 'status', 'notiz', 'erstellt'];
     const cell = (v) => {
       let s = String(v == null ? '' : v);

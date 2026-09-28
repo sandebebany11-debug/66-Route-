@@ -238,6 +238,7 @@ h2.display {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  padding-top: env(safe-area-inset-top, 0px);
   transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 .nav.is-scrolled {
@@ -1823,4 +1824,19 @@ table.res {
     background: none !important;
     padding: 0;
   }
+}
+
+.icon-btn.is-armed {
+  line-height: 1.2;
+  border-radius: 100px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--paper);
+  background: var(--bad);
+}
+.icon-btn.is-armed:hover {
+  color: var(--paper);
+  background: var(--bad);
 }

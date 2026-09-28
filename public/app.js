@@ -63,7 +63,7 @@
   $('#c-mail').textContent = S.email;
   $('#c-mail').href = 'mailto:' + S.email;
   $('#c-route').href = 'https://www.google.com/maps/dir/?api=1&destination=' + mapsQuery;
-  $('#c-map').src = 'https://www.google.com/maps?q=' + mapsQuery + '&output=embed';
+  if ($('#c-map')) $('#c-map').src = 'https://www.google.com/maps?q=' + mapsQuery + '&output=embed';
   $('#insta-link').href = S.instagram;
   $('#year').textContent = new Date().getFullYear();
 
