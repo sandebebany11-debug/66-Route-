@@ -115,6 +115,9 @@
   </figure>
 
   <div class="hero-content">
+    <div class="hero-logo reveal">
+      <img src="assets/logo.png" alt="Casa Ducale Wappen" width="120" height="147">
+    </div>
     <div class="rating-badge reveal">
       <span class="stars" aria-hidden="true">
         <svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg>
@@ -320,7 +323,7 @@
         <figcaption>Vorspeisen &amp; Antipasti</figcaption>
       </figure>
       <figure class="gallery-item g-buf reveal" data-reveal="fade-up" data-delay="100">
-        <img src="assets/photos/buffet-collage.jpg" alt="Buffet mit Pasta, Antipasti und Käseplatte bei Casa Ducale, ideal für Feiern" loading="lazy" width="1280" height="853">
+        <img src="assets/photos/buffet-pasta.jpg" alt="Pasta-Variationen vom Buffet bei Casa Ducale, ideal für Feiern" loading="lazy" width="625" height="425">
         <figcaption>Buffet &amp; Feiern</figcaption>
       </figure>
       <figure class="gallery-item g-d1 reveal" data-reveal="fade-up" data-delay="200">
@@ -331,8 +334,13 @@
         <img src="assets/photos/fleisch-grillplatte.jpg" alt="Gegrillte Fleischplatte bei Casa Ducale" loading="lazy" width="640" height="640">
         <figcaption>Grillplatte</figcaption>
       </figure>
-      <figure class="gallery-item g-dol reveal" data-reveal="fade-up" data-delay="400">
-        <img src="assets/photos/dolci-collage.jpg" alt="Hausgemachte Desserts: Tiramisu, Cheesecake, Crêpes und Waffeln bei Casa Ducale" loading="lazy" width="1280" height="853">
+      <figure class="gallery-item g-dol gallery-item--quad reveal" data-reveal="fade-up" data-delay="400">
+        <span class="quad-grid">
+          <img src="assets/photos/dolci-tile-1.jpg" alt="Schokoladenkuchen mit Erdbeeren bei Casa Ducale" loading="lazy" width="405" height="260">
+          <img src="assets/photos/dolci-tile-2.jpg" alt="Dessertteller mit Tiramisu und Cheesecake bei Casa Ducale" loading="lazy" width="435" height="260">
+          <img src="assets/photos/dolci-tile-3.jpg" alt="Cheesecake mit Waldbeeren bei Casa Ducale" loading="lazy" width="465" height="295">
+          <img src="assets/photos/dolci-tile-4.jpg" alt="Crêpe mit Beeren und Eis bei Casa Ducale" loading="lazy" width="430" height="253">
+        </span>
         <figcaption>Hausgemachte Dolci</figcaption>
       </figure>
     </div>
@@ -391,19 +399,19 @@
     </div>
 
     <form class="book-form reveal" data-reveal="fade-left" id="reserveForm" novalidate>
-      <fieldset class="book-people">
-        <legend>Personen</legend>
-        <div class="book-chips">
-          <label><input type="radio" name="personen" value="1 Person" required><span>1</span></label>
-          <label><input type="radio" name="personen" value="2 Personen" checked><span>2</span></label>
-          <label><input type="radio" name="personen" value="3 Personen"><span>3</span></label>
-          <label><input type="radio" name="personen" value="4 Personen"><span>4</span></label>
-          <label><input type="radio" name="personen" value="5 Personen"><span>5</span></label>
-          <label><input type="radio" name="personen" value="6 Personen"><span>6</span></label>
-          <label><input type="radio" name="personen" value="7 Personen"><span>7</span></label>
-          <label><input type="radio" name="personen" value="8+ Personen"><span>8+</span></label>
+      <div class="book-field book-field--full">
+        <label for="rf-people">Personen</label>
+        <div class="stepper">
+          <button type="button" class="stepper-btn" data-step="-1" aria-label="Weniger Personen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>
+          </button>
+          <input id="rf-people" name="personen" type="number" inputmode="numeric" value="2" min="1" max="20" readonly aria-live="polite">
+          <span class="stepper-label">Person(en)</span>
+          <button type="button" class="stepper-btn" data-step="1" aria-label="Mehr Personen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
         </div>
-      </fieldset>
+      </div>
 
       <div class="book-field">
         <label for="rf-date">Datum</label>
@@ -422,9 +430,20 @@
         <input id="rf-tel" name="telefon" type="tel" required autocomplete="tel" placeholder="Für Rückfragen">
       </div>
       <div class="book-field book-field--full">
+        <label for="rf-mail">E-Mail <small>(optional)</small></label>
+        <input id="rf-mail" name="email" type="email" autocomplete="email" placeholder="name@beispiel.de">
+      </div>
+      <div class="book-field book-field--full">
         <label for="rf-note">Anmerkungen <small>(optional)</small></label>
         <textarea id="rf-note" name="anmerkungen" rows="2" placeholder="Anlass, Allergien, Kinderstuhl, große Gruppe …"></textarea>
       </div>
+
+      <input type="text" name="botcheck" class="book-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <label class="book-consent book-field--full">
+        <input type="checkbox" id="rf-consent" name="datenschutz" required>
+        <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Reservierung per WhatsApp übermittelt werden.</span>
+      </label>
 
       <p class="book-error" id="reserveError" role="alert" hidden></p>
 
@@ -433,6 +452,16 @@
       </button>
       <p class="book-hint">Öffnet WhatsApp mit vorausgefüllter Nachricht an Casa Ducale.</p>
     </form>
+
+    <div class="book-success" id="reserveSuccess" hidden tabindex="-1">
+      <span class="book-success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </span>
+      <h3>Grazie!</h3>
+      <p>WhatsApp wurde geöffnet – senden Sie die vorausgefüllte Nachricht ab,
+      und wir bestätigen Ihre Reservierung so schnell wie möglich persönlich.</p>
+      <button type="button" class="btn btn-outline" id="reserveAgain">Neue Anfrage</button>
+    </div>
   </div>
 </section>
 

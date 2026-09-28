@@ -89,7 +89,21 @@
     dateInput.min = today.toISOString().slice(0, 10);
 
     const errorEl = document.getElementById('reserveError');
+    const successEl = document.getElementById('reserveSuccess');
+    const reserveAgainBtn = document.getElementById('reserveAgain');
     const WHATSAPP_NUMBER = '4921443444';
+
+    /* Stepper */
+    const peopleInput = document.getElementById('rf-people');
+    reserveForm.querySelectorAll('.stepper-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = Number(btn.dataset.step);
+        const next = Number(peopleInput.value) + step;
+        const min = Number(peopleInput.min);
+        const max = Number(peopleInput.max);
+        peopleInput.value = Math.min(max, Math.max(min, next));
+      });
+    });
 
     const formatDate = (isoDate) => {
       const [y, m, d] = isoDate.split('-');
@@ -99,6 +113,9 @@
     reserveForm.addEventListener('submit', (e) => {
       e.preventDefault();
       errorEl.hidden = true;
+
+      /* Honeypot: silently drop bot submissions */
+      if (reserveForm.botcheck.value) return;
 
       if (!reserveForm.checkValidity()) {
         reserveForm.reportValidity();
@@ -111,29 +128,39 @@
       const uhrzeit = data.get('uhrzeit');
       const name = data.get('name').trim();
       const telefon = data.get('telefon').trim();
+      const email = data.get('email').trim();
       const anmerkungen = data.get('anmerkungen').trim();
-
-      if (!personen) {
-        errorEl.textContent = 'Bitte wählen Sie die Anzahl der Personen.';
-        errorEl.hidden = false;
-        return;
-      }
+      const personenLabel = personen === '1' ? '1 Person' : `${personen} Personen`;
 
       const lines = [
         'Hallo Casa Ducale! Ich möchte gerne einen Tisch reservieren:',
         '',
-        `Personen: ${personen}`,
+        `Personen: ${personenLabel}`,
         `Datum: ${formatDate(datum)}`,
         `Uhrzeit: ${uhrzeit} Uhr`,
         `Name: ${name}`,
         `Telefon: ${telefon}`,
       ];
+      if (email) lines.push(`E-Mail: ${email}`);
       if (anmerkungen) lines.push(`Anmerkungen: ${anmerkungen}`);
       lines.push('', 'Vielen Dank!');
 
       const message = encodeURIComponent(lines.join('\n'));
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank', 'noopener');
+
+      reserveForm.hidden = true;
+      successEl.hidden = false;
+      successEl.focus();
     });
+
+    if (reserveAgainBtn) {
+      reserveAgainBtn.addEventListener('click', () => {
+        reserveForm.reset();
+        peopleInput.value = 2;
+        successEl.hidden = true;
+        reserveForm.hidden = false;
+      });
+    }
   }
 
   /* ---------- Set footer year ---------- */
