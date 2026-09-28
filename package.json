@@ -1,0 +1,13 @@
+{
+  "name": "art-of-hair-luetzenkirchen",
+  "version": "1.0.0",
+  "description": "Website mit Online-Terminbuchung und Reservierungsliste für Art of Hair, Leverkusen-Lützenkirchen",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

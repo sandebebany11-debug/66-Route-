@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Reservierungsliste – Art of Hair</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%233a2a22'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-style='italic' font-size='30' fill='%23d6b77c' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <header class="admin__bar">
+    <div class="wrap nav__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__mark">Art <i>of</i> Hair</span>
+        <span class="brand__place">Reservierungen</span>
+      </a>
+      <div style="display:flex;gap:1.4rem;align-items:center">
+        <a class="link" href="index.html" style="color:var(--on-night-mute)">Zur Website</a>
+        <button class="link" id="logout" hidden style="background:none;border:0;cursor:pointer;color:var(--on-night)">Abmelden</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap admin__main">
+    <!-- Login -->
+    <form class="login" id="login">
+      <h1 class="display">Anmelden</h1>
+      <p>Die Reservierungsliste ist nur für das Salon-Team.</p>
+      <div class="field">
+        <label for="pin">PIN</label>
+        <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" required autofocus>
+      </div>
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button class="btn" type="submit">Liste öffnen <span class="arrow">→</span></button>
+    </form>
+
+    <!-- Liste -->
+    <section id="board" hidden>
+      <div class="admin__title">
+        <div>
+          <h1 class="display">Reservierungs<em>liste</em></h1>
+          <p id="updated">—</p>
+        </div>
+      </div>
+
+      <p class="notice" id="demo-notice" hidden>
+        Demo-Modus: Es läuft kein Server – Reservierungen werden nur in diesem Browser gespeichert.
+        Für den echten Betrieb die Website mit <code>node server.js</code> starten (siehe README).
+      </p>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="f-range">Zeitraum</label>
+          <select id="f-range">
+            <option value="kommend">Ab heute</option>
+            <option value="heute">Nur heute</option>
+            <option value="woche">Nächste 7 Tage</option>
+            <option value="datum">Bestimmtes Datum</option>
+            <option value="vergangen">Vergangene</option>
+            <option value="alle">Alle</option>
+          </select>
+        </div>
+        <div class="field" id="f-date-wrap" hidden>
+          <label for="f-date">Datum</label>
+          <input id="f-date" type="date">
+        </div>
+        <div class="field">
+          <label for="f-stylist">Stylist:in</label>
+          <select id="f-stylist"><option value="">Alle</option></select>
+        </div>
+        <div class="field">
+          <label for="f-status">Status</label>
+          <select id="f-status">
+            <option value="">Alle außer storniert</option>
+            <option value="offen">Offen</option>
+            <option value="bestätigt">Bestätigt</option>
+            <option value="erledigt">Erledigt</option>
+            <option value="storniert">Storniert</option>
+            <option value="*">Alle</option>
+          </select>
+        </div>
+        <div class="field grow">
+          <label for="f-search">Suche</label>
+          <input id="f-search" type="search" placeholder="Name, Telefon, Nr. …">
+        </div>
+        <div class="actions">
+          <button class="btn btn--ghost" type="button" id="export">CSV</button>
+          <button class="btn btn--ghost" type="button" onclick="print()">Drucken</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="res">
+          <thead>
+            <tr>
+              <th>Zeit</th>
+              <th>Kund:in</th>
+              <th>Leistung</th>
+              <th>Stylist:in</th>
+              <th>Anmerkung</th>
+              <th>Status</th>
+              <th><span class="sr-only">Aktionen</span></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty-state" id="empty" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="booking-core.js"></script>
+  <script src="store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
