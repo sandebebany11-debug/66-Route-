@@ -78,6 +78,7 @@
       <a href="#speisekarte">Speisekarte</a>
       <a href="#galerie">Galerie</a>
       <a href="#bewertungen">Bewertungen</a>
+      <a href="#reservierung">Reservierung</a>
       <a href="#zahlung">Zahlung</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
@@ -86,7 +87,7 @@
         <svg class="icon" width="16" height="16"><use href="#i-phone"/></svg>
         0214 43444
       </a>
-      <a href="https://casa-ducale-leverkusen.eatbu.com" target="_blank" rel="noopener" class="btn btn-primary">Tisch reservieren</a>
+      <a href="#reservierung" class="btn btn-primary">Tisch reservieren</a>
     </div>
     <button class="burger" id="burger" aria-label="Menü öffnen">
       <span></span><span></span><span></span>
@@ -133,7 +134,7 @@
     </p>
 
     <div class="hero-cta reveal" style="animation-delay:.3s">
-      <a href="https://casa-ducale-leverkusen.eatbu.com" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+      <a href="#reservierung" class="btn btn-primary btn-lg">
         Tisch reservieren
       </a>
       <a href="#speisekarte" class="btn btn-outline-light btn-lg">
@@ -370,7 +371,68 @@
       </blockquote>
     </div>
 
-    <a href="#kontakt" class="btn btn-outline-light reveal" data-reveal="fade-up">Selbst Gast werden</a>
+    <a href="#reservierung" class="btn btn-outline-light reveal" data-reveal="fade-up">Selbst Gast werden</a>
+  </div>
+</section>
+
+<!-- ===== RESERVIERUNG ===== -->
+<section class="reservation" id="reservierung">
+  <div class="section-inner reservation-grid">
+    <div class="reservation-intro reveal" data-reveal="fade-right">
+      <span class="eyebrow">Tisch reservieren</span>
+      <h2>Ihr Tisch <em>wartet</em> auf Sie</h2>
+      <p>Füllen Sie das Formular aus – wir öffnen WhatsApp mit allen Angaben
+      vorausgefüllt, Sie müssen die Nachricht nur noch senden. Wir bestätigen
+      Ihre Reservierung so schnell wie möglich persönlich.</p>
+      <div class="reservation-alt">
+        <svg class="icon"><use href="#i-phone"/></svg>
+        Lieber anrufen? <a href="tel:+4921443444">0214 43444</a>
+      </div>
+    </div>
+
+    <form class="book-form reveal" data-reveal="fade-left" id="reserveForm" novalidate>
+      <fieldset class="book-people">
+        <legend>Personen</legend>
+        <div class="book-chips">
+          <label><input type="radio" name="personen" value="1 Person" required><span>1</span></label>
+          <label><input type="radio" name="personen" value="2 Personen" checked><span>2</span></label>
+          <label><input type="radio" name="personen" value="3 Personen"><span>3</span></label>
+          <label><input type="radio" name="personen" value="4 Personen"><span>4</span></label>
+          <label><input type="radio" name="personen" value="5 Personen"><span>5</span></label>
+          <label><input type="radio" name="personen" value="6 Personen"><span>6</span></label>
+          <label><input type="radio" name="personen" value="7 Personen"><span>7</span></label>
+          <label><input type="radio" name="personen" value="8+ Personen"><span>8+</span></label>
+        </div>
+      </fieldset>
+
+      <div class="book-field">
+        <label for="rf-date">Datum</label>
+        <input id="rf-date" name="datum" type="date" required>
+      </div>
+      <div class="book-field">
+        <label for="rf-time">Uhrzeit</label>
+        <input id="rf-time" name="uhrzeit" type="time" step="900" min="08:30" max="21:30" required>
+      </div>
+      <div class="book-field">
+        <label for="rf-name">Name</label>
+        <input id="rf-name" name="name" type="text" required autocomplete="name" placeholder="Vor- und Nachname">
+      </div>
+      <div class="book-field">
+        <label for="rf-tel">Telefon</label>
+        <input id="rf-tel" name="telefon" type="tel" required autocomplete="tel" placeholder="Für Rückfragen">
+      </div>
+      <div class="book-field book-field--full">
+        <label for="rf-note">Anmerkungen <small>(optional)</small></label>
+        <textarea id="rf-note" name="anmerkungen" rows="2" placeholder="Anlass, Allergien, Kinderstuhl, große Gruppe …"></textarea>
+      </div>
+
+      <p class="book-error" id="reserveError" role="alert" hidden></p>
+
+      <button type="submit" class="btn btn-primary btn-lg book-submit">
+        <svg class="icon"><use href="#i-dine"/></svg> Per WhatsApp anfragen
+      </button>
+      <p class="book-hint">Öffnet WhatsApp mit vorausgefüllter Nachricht an Casa Ducale.</p>
+    </form>
   </div>
 </section>
 
@@ -448,7 +510,7 @@
       <p class="hours-note">An Feiertagen können die Öffnungszeiten abweichen.</p>
 
       <div class="contact-cta">
-        <a href="https://casa-ducale-leverkusen.eatbu.com" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Tisch reservieren</a>
+        <a href="#reservierung" class="btn btn-primary btn-lg">Tisch reservieren</a>
         <a href="tel:+4921443444" class="btn btn-outline btn-lg">Anrufen</a>
       </div>
     </div>
@@ -477,6 +539,7 @@
       <a href="#speisekarte">Speisekarte</a>
       <a href="#galerie">Galerie</a>
       <a href="#bewertungen">Bewertungen</a>
+      <a href="#reservierung">Reservierung</a>
       <a href="#zahlung">Zahlung</a>
       <a href="#kontakt">Kontakt</a>
     </div>
@@ -490,7 +553,7 @@
   </div>
 </footer>
 
-<a href="https://casa-ducale-leverkusen.eatbu.com" target="_blank" rel="noopener" class="floating-cta">
+<a href="#reservierung" class="floating-cta">
   <span class="floating-cta-pulse"></span>
   <svg class="icon"><use href="#i-dine"/></svg> Tisch reservieren
 </a>

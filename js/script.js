@@ -81,6 +81,61 @@
   }, { threshold: 0.5 });
   counters.forEach(el => counterObserver.observe(el));
 
+  /* ---------- Reservation form -> WhatsApp ---------- */
+  const reserveForm = document.getElementById('reserveForm');
+  if (reserveForm) {
+    const dateInput = document.getElementById('rf-date');
+    const today = new Date();
+    dateInput.min = today.toISOString().slice(0, 10);
+
+    const errorEl = document.getElementById('reserveError');
+    const WHATSAPP_NUMBER = '4921443444';
+
+    const formatDate = (isoDate) => {
+      const [y, m, d] = isoDate.split('-');
+      return `${d}.${m}.${y}`;
+    };
+
+    reserveForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorEl.hidden = true;
+
+      if (!reserveForm.checkValidity()) {
+        reserveForm.reportValidity();
+        return;
+      }
+
+      const data = new FormData(reserveForm);
+      const personen = data.get('personen');
+      const datum = data.get('datum');
+      const uhrzeit = data.get('uhrzeit');
+      const name = data.get('name').trim();
+      const telefon = data.get('telefon').trim();
+      const anmerkungen = data.get('anmerkungen').trim();
+
+      if (!personen) {
+        errorEl.textContent = 'Bitte wählen Sie die Anzahl der Personen.';
+        errorEl.hidden = false;
+        return;
+      }
+
+      const lines = [
+        'Hallo Casa Ducale! Ich möchte gerne einen Tisch reservieren:',
+        '',
+        `Personen: ${personen}`,
+        `Datum: ${formatDate(datum)}`,
+        `Uhrzeit: ${uhrzeit} Uhr`,
+        `Name: ${name}`,
+        `Telefon: ${telefon}`,
+      ];
+      if (anmerkungen) lines.push(`Anmerkungen: ${anmerkungen}`);
+      lines.push('', 'Vielen Dank!');
+
+      const message = encodeURIComponent(lines.join('\n'));
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank', 'noopener');
+    });
+  }
+
   /* ---------- Set footer year ---------- */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
