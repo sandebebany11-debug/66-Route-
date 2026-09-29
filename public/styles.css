@@ -398,7 +398,7 @@ h2.display {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.45;
+  opacity: 0.55;
   transform: scale(1.08);
   animation: settle 2.4s var(--ease) both;
 }
@@ -877,7 +877,7 @@ h2.display {
   height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  filter: grayscale(0.35) contrast(1.02);
+  filter: grayscale(0.1) contrast(1.03);
   transition: transform 1.2s var(--ease), filter 0.8s var(--ease);
 }
 .member:hover .member__portrait img {
