@@ -190,6 +190,7 @@
 
 <!-- ===== ÜBER UNS ===== -->
 <section class="about" id="ueber-uns">
+  <img src="assets/logo.png" alt="" class="about-watermark" aria-hidden="true" loading="lazy">
   <div class="section-inner about-grid">
     <div class="about-quote reveal" data-reveal="fade-right">
       <span class="quote-mark" aria-hidden="true">&ldquo;</span>
@@ -223,6 +224,28 @@
       </ul>
       <a href="tel:+4921443444" class="btn btn-dark reveal" data-reveal="fade-up" data-delay="400">Jetzt anrufen &amp; Tisch sichern</a>
     </div>
+  </div>
+</section>
+
+<!-- ===== SPOTLIGHT ===== -->
+<section class="spotlight" id="spotlight">
+  <div class="spotlight-media" data-parallax="0.08">
+    <img src="assets/photos/fleisch-grillplatte.jpg" alt="Gegrillte Fleischplatte bei Casa Ducale" loading="lazy" width="640" height="640">
+  </div>
+  <div class="spotlight-shade"></div>
+  <div class="spotlight-content">
+    <span class="brandmark brandmark--spotlight reveal" data-reveal="zoom">
+      <img src="assets/logo.png" alt="" width="56" height="69" aria-hidden="true">
+    </span>
+    <span class="eyebrow reveal" data-reveal="fade-up">Fatto in Casa</span>
+    <h2 class="reveal" data-reveal="fade-up" data-delay="100">Schmecken Sie den <em>Unterschied</em>.</h2>
+    <p class="reveal" data-reveal="fade-up" data-delay="200">
+      Jedes Gericht wird frisch für Sie zubereitet – keine Kompromisse,
+      nur ehrliche italienische Küche wie bei Nonna.
+    </p>
+    <a href="#reservierung" class="btn btn-primary btn-lg reveal" data-reveal="fade-up" data-delay="300">
+      Jetzt Tisch sichern
+    </a>
   </div>
 </section>
 
@@ -555,6 +578,25 @@
   </div>
 </section>
 
+<!-- ===== FINALE CTA ===== -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <span class="brandmark brandmark--final reveal" data-reveal="zoom">
+      <img src="assets/logo.png" alt="Casa Ducale" width="72" height="88">
+    </span>
+    <h2 class="reveal" data-reveal="fade-up" data-delay="100">Buon Appetito wartet <em>auf Sie</em></h2>
+    <p class="reveal" data-reveal="fade-up" data-delay="200">Sichern Sie sich jetzt Ihren Tisch bei Casa Ducale – wir freuen uns auf Sie.</p>
+    <div class="final-cta-actions reveal" data-reveal="fade-up" data-delay="300">
+      <a href="#reservierung" class="btn btn-primary btn-lg">
+        <svg class="icon"><use href="#i-dine"/></svg> Tisch reservieren
+      </a>
+      <a href="tel:+4921443444" class="btn btn-outline-light btn-lg">
+        <svg class="icon"><use href="#i-phone"/></svg> 0214 43444
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer class="site-footer">
   <div class="section-inner footer-inner">
@@ -586,6 +628,15 @@
   <span class="floating-cta-pulse"></span>
   <svg class="icon"><use href="#i-dine"/></svg> Tisch reservieren
 </a>
+
+<div class="mobile-bar" id="mobileBar">
+  <a href="tel:+4921443444" class="mobile-bar-call" aria-label="Casa Ducale anrufen">
+    <svg class="icon"><use href="#i-phone"/></svg> Anrufen
+  </a>
+  <a href="#reservierung" class="mobile-bar-reserve">
+    <svg class="icon"><use href="#i-dine"/></svg> Tisch reservieren
+  </a>
+</div>
 
 <script src="js/script.js"></script>
 </body>
