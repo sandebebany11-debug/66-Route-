@@ -24,6 +24,29 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  /* ---------- Hero photo mouse tilt (desktop only) ---------- */
+  const heroSection = document.querySelector('.hero');
+  const heroPhotos = document.querySelectorAll('.hero-photo');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (heroSection && heroPhotos.length && !prefersReducedMotion && hasFinePointer) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width - 0.5;
+      const relY = (e.clientY - rect.top) / rect.height - 0.5;
+      heroPhotos.forEach(photo => {
+        photo.style.setProperty('--tiltx', `${relY * -8}deg`);
+        photo.style.setProperty('--tilty', `${relX * 10}deg`);
+      });
+    });
+    heroSection.addEventListener('mouseleave', () => {
+      heroPhotos.forEach(photo => {
+        photo.style.setProperty('--tiltx', '0deg');
+        photo.style.setProperty('--tilty', '0deg');
+      });
+    });
+  }
+
   /* ---------- Mobile menu ---------- */
   const burger = document.getElementById('burger');
   const mainNav = document.getElementById('mainNav');
